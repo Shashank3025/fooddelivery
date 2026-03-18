@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename Java project &apos;notification-servic&apos; to &apos;notification-service&apos;&#x0D;&#x0A;- Original element: &apos;notification-servic&apos;&#x0D;&#x0A;- Renamed element: &apos;notification-servic&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename Java project &apos;notification-servic&apos;" flags="7" id="org.eclipse.jdt.ui.rename.java.project" input="=notification-servic" name="notification-service" references="true" stamp="1773646113869" version="1.0"/>
+</session>

@@ -1,0 +1,5 @@
+package com.fooddelivery.order.service;
+
+public class OrderCommandService {
+
+}

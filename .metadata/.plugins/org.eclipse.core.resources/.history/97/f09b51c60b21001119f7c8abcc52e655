@@ -1,0 +1,5 @@
+package com.fooddelivery.user.service;
+
+public class UserService {
+
+}

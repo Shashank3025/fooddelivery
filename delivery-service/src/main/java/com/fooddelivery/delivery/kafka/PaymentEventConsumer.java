@@ -1,0 +1,26 @@
+package com.fooddelivery.delivery.kafka;
+
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.stereotype.Component;
+
+import com.fooddelivery.delivery.service.DeliveryService;
+
+@Component
+public class PaymentEventConsumer 
+{
+	private final DeliveryService deliveryService;
+	public PaymentEventConsumer(DeliveryService deliveryService) {
+        this.deliveryService = deliveryService;
+    }
+	
+	@KafkaListener(topics="payment-events",groupId="delivery-group")
+	public void consumePaymentEvent(String message)
+	{
+		System.out.println("Received Payment Event: " + message);
+        if (message.startsWith("PaymentSuccess:")) {
+            Long orderId = Long.parseLong(message.split(":")[1]);
+            deliveryService.assignDelivery(orderId);
+        }
+	}
+
+}

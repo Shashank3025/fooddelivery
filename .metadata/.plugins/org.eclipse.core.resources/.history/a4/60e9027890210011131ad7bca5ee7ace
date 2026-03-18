@@ -1,0 +1,42 @@
+package com.fooddelivery.order.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fooddelivery.order.entity.Order;
+import com.fooddelivery.order.service.OrderService;
+
+@RestController
+@RequestMapping("/orders")
+public class OrderController {
+
+    @Autowired
+    private OrderService orderService;
+
+    @Autowired
+    private KafkaTemplate<String,String> kafkaTemplate;
+
+    @PostMapping
+    public Order createOrder(@RequestBody Order order){
+
+        Order savedOrder = orderService.createOrder(order);
+
+        kafkaTemplate.send("order-events",String.valueOf(savedOrder.getId()), "OrderCreated:" + savedOrder.getId());
+
+        return savedOrder;
+    }
+
+    @GetMapping("/user/{userId}")
+    public List<Order> getUserOrders(@PathVariable Long userId){
+        return orderService.getUserOrders(userId);
+    }
+
+}

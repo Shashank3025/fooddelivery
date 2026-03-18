@@ -1,0 +1,5 @@
+package com.fooddelivery.restaurant.config;
+
+public class kafkaconfig {
+
+}

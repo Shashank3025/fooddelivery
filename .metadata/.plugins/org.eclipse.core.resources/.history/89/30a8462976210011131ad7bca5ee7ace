@@ -1,0 +1,61 @@
+package com.fooddelivery.restaurant;
+
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fooddelivery.restaurant.entity.MenuItem;
+import com.fooddelivery.restaurant.entity.Restaurant;
+import com.fooddelivery.restaurant.service.MenuItemService;
+import com.fooddelivery.restaurant.service.RestaurantService;
+
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequestMapping("/restaurants")
+@RequiredArgsConstructor
+public class RestaurantController 
+{
+	RestaurantService restaurantService;
+	
+	MenuItemService menuItemService;
+	
+	KafkaTemplate<String,String> kafkaTemplate;
+	
+	@PostMapping
+    public Restaurant addRestaurant(@RequestBody Restaurant restaurant) 
+	{
+        Restaurant savedRestaurant=restaurantService.saveRestaurant(restaurant);
+        kafkaTemplate.send("menu-topic", "Menu item added: " + savedRestaurant.getName() + " for restaurant " + savedRestaurant.getId());
+        return savedRestaurant;
+    }
+
+    @GetMapping
+    public List<Restaurant> getAllRestaurants() {
+        return restaurantService.getAllRestaurants();
+    }
+
+    @PostMapping("/{id}/menu")
+    public MenuItem addMenuItem(@PathVariable Long id, @RequestBody MenuItem menuItem) {
+        Restaurant restaurant = restaurantService.getRestaurantById(id);
+        menuItem.setRestaurant(restaurant);
+        return menuItemService.addMenuItem(menuItem);
+    }
+
+
+    @GetMapping("/{id}/menu")
+    public Page<MenuItem> getMenu(@PathVariable Long id, Pageable pageable) {
+        return menuItemService.getMenu(id, pageable);
+    }
+
+	
+
+}
