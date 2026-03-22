@@ -1,0 +1,475 @@
+2026-03-22T01:13:57.150-05:00  INFO 9932 --- [order-service] [main] c.f.order.OrderServiceApplication        : Starting OrderServiceApplication using Java 23.0.2 with PID 9932 (C:\Users\shash\Documents\deliveryfood\order-service\target\classes started by shash in C:\Users\shash\Documents\deliveryfood\order-service)
+2026-03-22T01:13:57.158-05:00  INFO 9932 --- [order-service] [main] c.f.order.OrderServiceApplication        : No active profile set, falling back to 1 default profile: "default"
+2026-03-22T01:13:58.521-05:00  INFO 9932 --- [order-service] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-22T01:13:58.613-05:00  INFO 9932 --- [order-service] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 72 ms. Found 1 JPA repository interface.
+2026-03-22T01:13:59.400-05:00  INFO 9932 --- [order-service] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8083 (http)
+2026-03-22T01:13:59.450-05:00  INFO 9932 --- [order-service] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-22T01:13:59.452-05:00  INFO 9932 --- [order-service] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.18]
+2026-03-22T01:13:59.561-05:00  INFO 9932 --- [order-service] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 2301 ms
+2026-03-22T01:13:59.984-05:00  INFO 9932 --- [order-service] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-03-22T01:14:00.092-05:00  INFO 9932 --- [order-service] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.4.Final
+2026-03-22T01:14:01.086-05:00  INFO 9932 --- [order-service] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-22T01:14:01.154-05:00  INFO 9932 --- [order-service] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-03-22T01:14:01.969-05:00  INFO 9932 --- [order-service] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2f3a8166
+2026-03-22T01:14:01.972-05:00  INFO 9932 --- [order-service] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-03-22T01:14:02.075-05:00  WARN 9932 --- [order-service] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-22T01:14:02.120-05:00  INFO 9932 --- [order-service] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/foodservice]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.41
+	Default catalog/schema: foodservice/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-03-22T01:14:03.951-05:00  INFO 9932 --- [order-service] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-22T01:14:04.112-05:00  INFO 9932 --- [order-service] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-22T01:14:04.268-05:00  INFO 9932 --- [order-service] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-03-22T01:14:04.745-05:00  WARN 9932 --- [order-service] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-22T01:14:05.605-05:00  INFO 9932 --- [order-service] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-03-22T01:14:05.734-05:00  INFO 9932 --- [order-service] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8083 (http) with context path '/'
+2026-03-22T01:14:05.745-05:00  INFO 9932 --- [order-service] [main] c.f.order.OrderServiceApplication        : Started OrderServiceApplication in 9.445 seconds (process running for 10.046)
+2026-03-22T01:16:23.583-05:00  INFO 9932 --- [order-service] [http-nio-8083-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-22T01:16:23.584-05:00  INFO 9932 --- [order-service] [http-nio-8083-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-03-22T01:16:23.590-05:00  INFO 9932 --- [order-service] [http-nio-8083-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+2026-03-22T01:16:24.503-05:00  INFO 9932 --- [order-service] [http-nio-8083-exec-2] o.a.kafka.common.config.AbstractConfig   : ProducerConfig values: 
+	acks = -1
+	batch.size = 16384
+	bootstrap.servers = [host.docker.internal:29092]
+	buffer.memory = 33554432
+	client.dns.lookup = use_all_dns_ips
+	client.id = order-service-producer-1
+	compression.gzip.level = -1
+	compression.lz4.level = 9
+	compression.type = none
+	compression.zstd.level = 3
+	connections.max.idle.ms = 540000
+	delivery.timeout.ms = 120000
+	enable.idempotence = true
+	enable.metrics.push = true
+	interceptor.classes = []
+	key.serializer = class org.apache.kafka.common.serialization.StringSerializer
+	linger.ms = 5
+	max.block.ms = 60000
+	max.in.flight.requests.per.connection = 5
+	max.request.size = 1048576
+	metadata.max.age.ms = 300000
+	metadata.max.idle.ms = 300000
+	metadata.recovery.rebootstrap.trigger.ms = 300000
+	metadata.recovery.strategy = rebootstrap
+	metric.reporters = [org.apache.kafka.common.metrics.JmxReporter]
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partitioner.adaptive.partitioning.enable = true
+	partitioner.availability.timeout.ms = 0
+	partitioner.class = null
+	partitioner.ignore.keys = false
+	receive.buffer.bytes = 32768
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retries = 2147483647
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.assertion.algorithm = RS256
+	sasl.oauthbearer.assertion.claim.aud = null
+	sasl.oauthbearer.assertion.claim.exp.seconds = 300
+	sasl.oauthbearer.assertion.claim.iss = null
+	sasl.oauthbearer.assertion.claim.jti.include = false
+	sasl.oauthbearer.assertion.claim.nbf.seconds = 60
+	sasl.oauthbearer.assertion.claim.sub = null
+	sasl.oauthbearer.assertion.file = null
+	sasl.oauthbearer.assertion.private.key.file = null
+	sasl.oauthbearer.assertion.private.key.passphrase = null
+	sasl.oauthbearer.assertion.template.file = null
+	sasl.oauthbearer.client.credentials.client.id = null
+	sasl.oauthbearer.client.credentials.client.secret = null
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.header.urlencode = false
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.jwt.retriever.class = class org.apache.kafka.common.security.oauthbearer.DefaultJwtRetriever
+	sasl.oauthbearer.jwt.validator.class = class org.apache.kafka.common.security.oauthbearer.DefaultJwtValidator
+	sasl.oauthbearer.scope = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	transaction.timeout.ms = 60000
+	transaction.two.phase.commit.enable = false
+	transactional.id = null
+	value.serializer = class org.apache.kafka.common.serialization.StringSerializer
+
+2026-03-22T01:16:24.615-05:00  INFO 9932 --- [order-service] [http-nio-8083-exec-2] o.a.k.c.t.i.KafkaMetricsCollector        : initializing Kafka metrics collector
+2026-03-22T01:16:24.692-05:00  INFO 9932 --- [order-service] [http-nio-8083-exec-2] o.a.k.clients.producer.KafkaProducer     : [Producer clientId=order-service-producer-1] Instantiated an idempotent producer.
+2026-03-22T01:16:24.879-05:00  INFO 9932 --- [order-service] [http-nio-8083-exec-2] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 4.1.1
+2026-03-22T01:16:24.880-05:00  INFO 9932 --- [order-service] [http-nio-8083-exec-2] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: be816b82d25370ce
+2026-03-22T01:16:24.881-05:00  INFO 9932 --- [order-service] [http-nio-8083-exec-2] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1774160184869
+2026-03-22T01:16:28.008-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:16:28.010-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Connection to node -1 (host.docker.internal/192.168.1.78:29092) could not be established. Node may not be available.
+2026-03-22T01:16:28.017-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:16:30.168-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:16:30.168-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Connection to node -1 (host.docker.internal/192.168.1.78:29092) could not be established. Node may not be available.
+2026-03-22T01:16:30.168-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:16:32.379-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:16:32.379-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Connection to node -1 (host.docker.internal/192.168.1.78:29092) could not be established. Node may not be available.
+2026-03-22T01:16:32.379-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:16:34.645-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:16:34.646-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Connection to node -1 (host.docker.internal/192.168.1.78:29092) could not be established. Node may not be available.
+2026-03-22T01:16:34.647-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:16:37.090-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:16:37.090-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Connection to node -1 (host.docker.internal/192.168.1.78:29092) could not be established. Node may not be available.
+2026-03-22T01:16:37.090-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:16:39.786-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:16:39.787-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Connection to node -1 (host.docker.internal/192.168.1.78:29092) could not be established. Node may not be available.
+2026-03-22T01:16:39.788-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:16:40.734-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.Metadata        : [Producer clientId=order-service-producer-1] Rebootstrapping with [host.docker.internal/192.168.1.78:29092]
+2026-03-22T01:16:42.830-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:16:42.830-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Connection to node -1 (host.docker.internal/192.168.1.78:29092) could not be established. Node may not be available.
+2026-03-22T01:16:42.830-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:16:45.781-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:16:45.781-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Connection to node -1 (host.docker.internal/192.168.1.78:29092) could not be established. Node may not be available.
+2026-03-22T01:16:45.781-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:16:46.691-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.Metadata        : [Producer clientId=order-service-producer-1] Rebootstrapping with [host.docker.internal/192.168.1.78:29092]
+2026-03-22T01:16:48.824-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:16:48.824-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Connection to node -1 (host.docker.internal/192.168.1.78:29092) could not be established. Node may not be available.
+2026-03-22T01:16:48.824-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:16:51.728-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:16:51.728-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Connection to node -1 (host.docker.internal/192.168.1.78:29092) could not be established. Node may not be available.
+2026-03-22T01:16:51.729-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:16:52.640-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.Metadata        : [Producer clientId=order-service-producer-1] Rebootstrapping with [host.docker.internal/192.168.1.78:29092]
+2026-03-22T01:16:52.737-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:16:52.739-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Cancelled in-flight API_VERSIONS request with correlation id 0 due to node -1 being disconnected (elapsed time since creation: 32ms, elapsed time since send: 32ms, throttle time: 0ms, request timeout: 30000ms)
+2026-03-22T01:16:52.739-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:16:53.704-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.Metadata        : [Producer clientId=order-service-producer-1] Rebootstrapping with [host.docker.internal/192.168.1.78:29092]
+2026-03-22T01:16:53.771-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:16:53.771-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Cancelled in-flight API_VERSIONS request with correlation id 1 due to node -1 being disconnected (elapsed time since creation: 2ms, elapsed time since send: 2ms, throttle time: 0ms, request timeout: 30000ms)
+2026-03-22T01:16:53.772-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:16:54.789-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:16:54.790-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Cancelled in-flight API_VERSIONS request with correlation id 2 due to node -1 being disconnected (elapsed time since creation: 4ms, elapsed time since send: 4ms, throttle time: 0ms, request timeout: 30000ms)
+2026-03-22T01:16:54.790-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:16:55.802-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:16:55.802-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Cancelled in-flight API_VERSIONS request with correlation id 3 due to node -1 being disconnected (elapsed time since creation: 3ms, elapsed time since send: 3ms, throttle time: 0ms, request timeout: 30000ms)
+2026-03-22T01:16:55.803-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:16:56.785-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:16:56.787-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Cancelled in-flight API_VERSIONS request with correlation id 4 due to node -1 being disconnected (elapsed time since creation: 4ms, elapsed time since send: 4ms, throttle time: 0ms, request timeout: 30000ms)
+2026-03-22T01:16:56.788-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:16:56.904-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.Metadata        : [Producer clientId=order-service-producer-1] Rebootstrapping with [host.docker.internal/192.168.1.78:29092]
+2026-03-22T01:16:56.958-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.Metadata        : [Producer clientId=order-service-producer-1] Rebootstrapping with [host.docker.internal/192.168.1.78:29092]
+2026-03-22T01:16:57.021-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.Metadata        : [Producer clientId=order-service-producer-1] Rebootstrapping with [host.docker.internal/192.168.1.78:29092]
+2026-03-22T01:16:57.083-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.Metadata        : [Producer clientId=order-service-producer-1] Rebootstrapping with [host.docker.internal/192.168.1.78:29092]
+2026-03-22T01:16:57.146-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.Metadata        : [Producer clientId=order-service-producer-1] Rebootstrapping with [host.docker.internal/192.168.1.78:29092]
+2026-03-22T01:16:57.210-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.Metadata        : [Producer clientId=order-service-producer-1] Rebootstrapping with [host.docker.internal/192.168.1.78:29092]
+2026-03-22T01:16:57.272-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.Metadata        : [Producer clientId=order-service-producer-1] Rebootstrapping with [host.docker.internal/192.168.1.78:29092]
+2026-03-22T01:16:57.335-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.Metadata        : [Producer clientId=order-service-producer-1] Rebootstrapping with [host.docker.internal/192.168.1.78:29092]
+2026-03-22T01:16:57.396-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.Metadata        : [Producer clientId=order-service-producer-1] Rebootstrapping with [host.docker.internal/192.168.1.78:29092]
+2026-03-22T01:16:57.458-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.Metadata        : [Producer clientId=order-service-producer-1] Rebootstrapping with [host.docker.internal/192.168.1.78:29092]
+2026-03-22T01:16:57.521-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.Metadata        : [Producer clientId=order-service-producer-1] Rebootstrapping with [host.docker.internal/192.168.1.78:29092]
+2026-03-22T01:16:57.583-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.Metadata        : [Producer clientId=order-service-producer-1] Rebootstrapping with [host.docker.internal/192.168.1.78:29092]
+2026-03-22T01:16:57.648-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:16:57.648-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Cancelled in-flight API_VERSIONS request with correlation id 5 due to node -1 being disconnected (elapsed time since creation: 2ms, elapsed time since send: 2ms, throttle time: 0ms, request timeout: 30000ms)
+2026-03-22T01:16:57.649-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:16:58.498-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.Metadata        : [Producer clientId=order-service-producer-1] Rebootstrapping with [host.docker.internal/192.168.1.78:29092]
+2026-03-22T01:16:58.623-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.Metadata        : [Producer clientId=order-service-producer-1] Rebootstrapping with [host.docker.internal/192.168.1.78:29092]
+2026-03-22T01:16:58.692-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:16:58.693-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Cancelled in-flight API_VERSIONS request with correlation id 6 due to node -1 being disconnected (elapsed time since creation: 4ms, elapsed time since send: 4ms, throttle time: 0ms, request timeout: 30000ms)
+2026-03-22T01:16:58.694-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:16:59.711-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:16:59.712-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Cancelled in-flight API_VERSIONS request with correlation id 7 due to node -1 being disconnected (elapsed time since creation: 2ms, elapsed time since send: 2ms, throttle time: 0ms, request timeout: 30000ms)
+2026-03-22T01:16:59.713-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:17:00.686-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.Metadata        : [Producer clientId=order-service-producer-1] Rebootstrapping with [host.docker.internal/192.168.1.78:29092]
+2026-03-22T01:17:01.019-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] The metadata response from the cluster reported a recoverable issue with correlation id 10 : {order-events=LEADER_NOT_AVAILABLE}
+2026-03-22T01:17:01.022-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.Metadata        : [Producer clientId=order-service-producer-1] Cluster ID: LB3Y3i5BQ0C_ADVT3QYVCw
+2026-03-22T01:17:01.143-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] o.a.k.c.p.internals.TransactionManager   : [Producer clientId=order-service-producer-1] ProducerId set to 3000 with epoch 0
+2026-03-22T01:17:01.159-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] The metadata response from the cluster reported a recoverable issue with correlation id 15 : {order-events=LEADER_NOT_AVAILABLE}
+2026-03-22T01:17:01.411-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] The metadata response from the cluster reported a recoverable issue with correlation id 17 : {order-events=LEADER_NOT_AVAILABLE}
+2026-03-22T01:30:50.663-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node 1 disconnected.
+2026-03-22T01:30:50.664-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.Metadata        : [Producer clientId=order-service-producer-1] Rebootstrapping with [host.docker.internal/192.168.1.78:29092]
+2026-03-22T01:30:50.692-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:30:50.693-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Cancelled in-flight API_VERSIONS request with correlation id 23 due to node -1 being disconnected (elapsed time since creation: 11ms, elapsed time since send: 11ms, throttle time: 0ms, request timeout: 30000ms)
+2026-03-22T01:30:50.696-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:30:50.821-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:30:50.822-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Cancelled in-flight API_VERSIONS request with correlation id 24 due to node -1 being disconnected (elapsed time since creation: 3ms, elapsed time since send: 3ms, throttle time: 0ms, request timeout: 30000ms)
+2026-03-22T01:30:50.822-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:30:51.073-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:30:51.074-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Cancelled in-flight API_VERSIONS request with correlation id 25 due to node -1 being disconnected (elapsed time since creation: 5ms, elapsed time since send: 5ms, throttle time: 0ms, request timeout: 30000ms)
+2026-03-22T01:30:51.075-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:30:51.466-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.Metadata        : [Producer clientId=order-service-producer-1] Rebootstrapping with [host.docker.internal/192.168.1.78:29092]
+2026-03-22T01:30:51.528-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.Metadata        : [Producer clientId=order-service-producer-1] Rebootstrapping with [host.docker.internal/192.168.1.78:29092]
+2026-03-22T01:30:51.593-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:30:51.594-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Cancelled in-flight API_VERSIONS request with correlation id 26 due to node -1 being disconnected (elapsed time since creation: 1ms, elapsed time since send: 1ms, throttle time: 0ms, request timeout: 30000ms)
+2026-03-22T01:30:51.594-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:30:54.581-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:30:54.581-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Connection to node -1 (host.docker.internal/192.168.1.78:29092) could not be established. Node may not be available.
+2026-03-22T01:30:54.581-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:30:56.619-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:30:56.620-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Cancelled in-flight API_VERSIONS request with correlation id 27 due to node -1 being disconnected (elapsed time since creation: 2ms, elapsed time since send: 2ms, throttle time: 0ms, request timeout: 30000ms)
+2026-03-22T01:30:56.621-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:30:57.632-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:30:57.633-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Cancelled in-flight API_VERSIONS request with correlation id 28 due to node -1 being disconnected (elapsed time since creation: 1ms, elapsed time since send: 1ms, throttle time: 0ms, request timeout: 30000ms)
+2026-03-22T01:30:57.634-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:30:58.581-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:30:58.582-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Cancelled in-flight API_VERSIONS request with correlation id 29 due to node -1 being disconnected (elapsed time since creation: 2ms, elapsed time since send: 2ms, throttle time: 0ms, request timeout: 30000ms)
+2026-03-22T01:30:58.583-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:30:59.599-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:30:59.600-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Cancelled in-flight API_VERSIONS request with correlation id 30 due to node -1 being disconnected (elapsed time since creation: 6ms, elapsed time since send: 6ms, throttle time: 0ms, request timeout: 30000ms)
+2026-03-22T01:30:59.600-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:31:00.616-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:31:00.617-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Cancelled in-flight API_VERSIONS request with correlation id 31 due to node -1 being disconnected (elapsed time since creation: 2ms, elapsed time since send: 2ms, throttle time: 0ms, request timeout: 30000ms)
+2026-03-22T01:31:00.618-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:31:01.483-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.Metadata        : [Producer clientId=order-service-producer-1] Rebootstrapping with [host.docker.internal/192.168.1.78:29092]
+2026-03-22T01:31:01.593-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.Metadata        : [Producer clientId=order-service-producer-1] Rebootstrapping with [host.docker.internal/192.168.1.78:29092]
+2026-03-22T01:31:01.659-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:31:01.659-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Cancelled in-flight API_VERSIONS request with correlation id 32 due to node -1 being disconnected (elapsed time since creation: 3ms, elapsed time since send: 3ms, throttle time: 0ms, request timeout: 30000ms)
+2026-03-22T01:31:01.660-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:31:02.673-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:31:02.674-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Cancelled in-flight API_VERSIONS request with correlation id 33 due to node -1 being disconnected (elapsed time since creation: 4ms, elapsed time since send: 4ms, throttle time: 0ms, request timeout: 30000ms)
+2026-03-22T01:31:02.675-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:31:03.685-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:31:03.686-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Cancelled in-flight API_VERSIONS request with correlation id 34 due to node -1 being disconnected (elapsed time since creation: 3ms, elapsed time since send: 3ms, throttle time: 0ms, request timeout: 30000ms)
+2026-03-22T01:31:03.686-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:31:04.696-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:31:04.696-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Cancelled in-flight API_VERSIONS request with correlation id 35 due to node -1 being disconnected (elapsed time since creation: 3ms, elapsed time since send: 3ms, throttle time: 0ms, request timeout: 30000ms)
+2026-03-22T01:31:04.697-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:31:05.706-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:31:05.707-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Cancelled in-flight API_VERSIONS request with correlation id 36 due to node -1 being disconnected (elapsed time since creation: 2ms, elapsed time since send: 2ms, throttle time: 0ms, request timeout: 30000ms)
+2026-03-22T01:31:05.707-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:31:06.725-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:31:06.725-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Cancelled in-flight API_VERSIONS request with correlation id 37 due to node -1 being disconnected (elapsed time since creation: 3ms, elapsed time since send: 3ms, throttle time: 0ms, request timeout: 30000ms)
+2026-03-22T01:31:06.726-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:31:07.742-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:31:07.743-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Cancelled in-flight API_VERSIONS request with correlation id 38 due to node -1 being disconnected (elapsed time since creation: 3ms, elapsed time since send: 3ms, throttle time: 0ms, request timeout: 30000ms)
+2026-03-22T01:31:07.743-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:31:08.755-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Node -1 disconnected.
+2026-03-22T01:31:08.756-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Cancelled in-flight API_VERSIONS request with correlation id 39 due to node -1 being disconnected (elapsed time since creation: 2ms, elapsed time since send: 2ms, throttle time: 0ms, request timeout: 30000ms)
+2026-03-22T01:31:08.756-05:00  WARN 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=order-service-producer-1] Bootstrap broker host.docker.internal:29092 (id: -1 rack: null isFenced: false) disconnected
+2026-03-22T01:31:09.787-05:00  INFO 9932 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.Metadata        : [Producer clientId=order-service-producer-1] Cluster ID: p3m41eH0RgijyjR6J2McuA
+2026-03-22T01:31:55.895-05:00  INFO 9932 --- [order-service] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-03-22T01:31:55.910-05:00  INFO 9932 --- [order-service] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-03-22T01:31:55.912-05:00  INFO 9932 --- [order-service] [SpringApplicationShutdownHook] o.a.k.clients.producer.KafkaProducer     : [Producer clientId=order-service-producer-1] Closing the Kafka producer with timeoutMillis = 30000 ms.
+2026-03-22T01:31:55.931-05:00  INFO 9932 --- [order-service] [SpringApplicationShutdownHook] o.apache.kafka.common.metrics.Metrics    : Metrics scheduler closed
+2026-03-22T01:31:55.931-05:00  INFO 9932 --- [order-service] [SpringApplicationShutdownHook] o.apache.kafka.common.metrics.Metrics    : Closing reporter org.apache.kafka.common.metrics.JmxReporter
+2026-03-22T01:31:55.932-05:00  INFO 9932 --- [order-service] [SpringApplicationShutdownHook] o.apache.kafka.common.metrics.Metrics    : Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
+2026-03-22T01:31:55.932-05:00  INFO 9932 --- [order-service] [SpringApplicationShutdownHook] o.apache.kafka.common.metrics.Metrics    : Metrics reporters closed
+2026-03-22T01:31:55.934-05:00  INFO 9932 --- [order-service] [SpringApplicationShutdownHook] o.a.kafka.common.utils.AppInfoParser     : App info kafka.producer for order-service-producer-1 unregistered
+2026-03-22T01:31:55.943-05:00  INFO 9932 --- [order-service] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-22T01:31:55.955-05:00  INFO 9932 --- [order-service] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-03-22T01:31:55.965-05:00  INFO 9932 --- [order-service] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-03-22T01:32:04.558-05:00  INFO 14004 --- [order-service] [main] c.f.order.OrderServiceApplication        : Starting OrderServiceApplication using Java 23.0.2 with PID 14004 (C:\Users\shash\Documents\deliveryfood\order-service\target\classes started by shash in C:\Users\shash\Documents\deliveryfood\order-service)
+2026-03-22T01:32:04.568-05:00  INFO 14004 --- [order-service] [main] c.f.order.OrderServiceApplication        : No active profile set, falling back to 1 default profile: "default"
+2026-03-22T01:32:05.546-05:00  INFO 14004 --- [order-service] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-22T01:32:05.602-05:00  INFO 14004 --- [order-service] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 46 ms. Found 1 JPA repository interface.
+2026-03-22T01:32:06.430-05:00  INFO 14004 --- [order-service] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8083 (http)
+2026-03-22T01:32:06.451-05:00  INFO 14004 --- [order-service] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-22T01:32:06.451-05:00  INFO 14004 --- [order-service] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.18]
+2026-03-22T01:32:06.526-05:00  INFO 14004 --- [order-service] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1896 ms
+2026-03-22T01:32:06.804-05:00  INFO 14004 --- [order-service] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-03-22T01:32:06.858-05:00  INFO 14004 --- [order-service] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.4.Final
+2026-03-22T01:32:07.595-05:00  INFO 14004 --- [order-service] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-22T01:32:07.651-05:00  INFO 14004 --- [order-service] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-03-22T01:32:08.442-05:00  INFO 14004 --- [order-service] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3387ab0
+2026-03-22T01:32:08.448-05:00  INFO 14004 --- [order-service] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-03-22T01:32:08.575-05:00  WARN 14004 --- [order-service] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-22T01:32:08.626-05:00  INFO 14004 --- [order-service] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/foodservice]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.41
+	Default catalog/schema: foodservice/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-03-22T01:32:10.586-05:00  INFO 14004 --- [order-service] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-22T01:32:10.708-05:00  INFO 14004 --- [order-service] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-22T01:32:10.802-05:00  INFO 14004 --- [order-service] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-03-22T01:32:11.126-05:00  WARN 14004 --- [order-service] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-22T01:32:11.691-05:00  INFO 14004 --- [order-service] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-03-22T01:32:11.819-05:00  INFO 14004 --- [order-service] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8083 (http) with context path '/'
+2026-03-22T01:32:11.828-05:00  INFO 14004 --- [order-service] [main] c.f.order.OrderServiceApplication        : Started OrderServiceApplication in 7.697 seconds (process running for 8.112)
+2026-03-22T01:32:14.918-05:00  INFO 14004 --- [order-service] [http-nio-8083-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-22T01:32:14.920-05:00  INFO 14004 --- [order-service] [http-nio-8083-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-03-22T01:32:14.925-05:00  INFO 14004 --- [order-service] [http-nio-8083-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+2026-03-22T01:32:15.730-05:00  INFO 14004 --- [order-service] [http-nio-8083-exec-1] o.a.kafka.common.config.AbstractConfig   : ProducerConfig values: 
+	acks = -1
+	batch.size = 16384
+	bootstrap.servers = [host.docker.internal:29092]
+	buffer.memory = 33554432
+	client.dns.lookup = use_all_dns_ips
+	client.id = order-service-producer-1
+	compression.gzip.level = -1
+	compression.lz4.level = 9
+	compression.type = none
+	compression.zstd.level = 3
+	connections.max.idle.ms = 540000
+	delivery.timeout.ms = 120000
+	enable.idempotence = true
+	enable.metrics.push = true
+	interceptor.classes = []
+	key.serializer = class org.apache.kafka.common.serialization.StringSerializer
+	linger.ms = 5
+	max.block.ms = 60000
+	max.in.flight.requests.per.connection = 5
+	max.request.size = 1048576
+	metadata.max.age.ms = 300000
+	metadata.max.idle.ms = 300000
+	metadata.recovery.rebootstrap.trigger.ms = 300000
+	metadata.recovery.strategy = rebootstrap
+	metric.reporters = [org.apache.kafka.common.metrics.JmxReporter]
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partitioner.adaptive.partitioning.enable = true
+	partitioner.availability.timeout.ms = 0
+	partitioner.class = null
+	partitioner.ignore.keys = false
+	receive.buffer.bytes = 32768
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retries = 2147483647
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.assertion.algorithm = RS256
+	sasl.oauthbearer.assertion.claim.aud = null
+	sasl.oauthbearer.assertion.claim.exp.seconds = 300
+	sasl.oauthbearer.assertion.claim.iss = null
+	sasl.oauthbearer.assertion.claim.jti.include = false
+	sasl.oauthbearer.assertion.claim.nbf.seconds = 60
+	sasl.oauthbearer.assertion.claim.sub = null
+	sasl.oauthbearer.assertion.file = null
+	sasl.oauthbearer.assertion.private.key.file = null
+	sasl.oauthbearer.assertion.private.key.passphrase = null
+	sasl.oauthbearer.assertion.template.file = null
+	sasl.oauthbearer.client.credentials.client.id = null
+	sasl.oauthbearer.client.credentials.client.secret = null
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.header.urlencode = false
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.jwt.retriever.class = class org.apache.kafka.common.security.oauthbearer.DefaultJwtRetriever
+	sasl.oauthbearer.jwt.validator.class = class org.apache.kafka.common.security.oauthbearer.DefaultJwtValidator
+	sasl.oauthbearer.scope = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	transaction.timeout.ms = 60000
+	transaction.two.phase.commit.enable = false
+	transactional.id = null
+	value.serializer = class org.apache.kafka.common.serialization.StringSerializer
+
+2026-03-22T01:32:15.813-05:00  INFO 14004 --- [order-service] [http-nio-8083-exec-1] o.a.k.c.t.i.KafkaMetricsCollector        : initializing Kafka metrics collector
+2026-03-22T01:32:15.893-05:00  INFO 14004 --- [order-service] [http-nio-8083-exec-1] o.a.k.clients.producer.KafkaProducer     : [Producer clientId=order-service-producer-1] Instantiated an idempotent producer.
+2026-03-22T01:32:16.024-05:00  INFO 14004 --- [order-service] [http-nio-8083-exec-1] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 4.1.1
+2026-03-22T01:32:16.025-05:00  INFO 14004 --- [order-service] [http-nio-8083-exec-1] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: be816b82d25370ce
+2026-03-22T01:32:16.026-05:00  INFO 14004 --- [order-service] [http-nio-8083-exec-1] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1774161136020
+2026-03-22T01:32:17.085-05:00  INFO 14004 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] org.apache.kafka.clients.Metadata        : [Producer clientId=order-service-producer-1] Cluster ID: p3m41eH0RgijyjR6J2McuA
+2026-03-22T01:32:17.228-05:00  INFO 14004 --- [order-service] [kafka-producer-network-thread | order-service-producer-1] o.a.k.c.p.internals.TransactionManager   : [Producer clientId=order-service-producer-1] ProducerId set to 0 with epoch 0
+2026-03-22T01:38:01.691-05:00  INFO 14004 --- [order-service] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-03-22T01:38:01.697-05:00  INFO 14004 --- [order-service] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-03-22T01:38:01.697-05:00  INFO 14004 --- [order-service] [SpringApplicationShutdownHook] o.a.k.clients.producer.KafkaProducer     : [Producer clientId=order-service-producer-1] Closing the Kafka producer with timeoutMillis = 30000 ms.
+2026-03-22T01:38:01.719-05:00  INFO 14004 --- [order-service] [SpringApplicationShutdownHook] o.apache.kafka.common.metrics.Metrics    : Metrics scheduler closed
+2026-03-22T01:38:01.720-05:00  INFO 14004 --- [order-service] [SpringApplicationShutdownHook] o.apache.kafka.common.metrics.Metrics    : Closing reporter org.apache.kafka.common.metrics.JmxReporter
+2026-03-22T01:38:01.720-05:00  INFO 14004 --- [order-service] [SpringApplicationShutdownHook] o.apache.kafka.common.metrics.Metrics    : Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
+2026-03-22T01:38:01.721-05:00  INFO 14004 --- [order-service] [SpringApplicationShutdownHook] o.apache.kafka.common.metrics.Metrics    : Metrics reporters closed
+2026-03-22T01:38:01.723-05:00  INFO 14004 --- [order-service] [SpringApplicationShutdownHook] o.a.kafka.common.utils.AppInfoParser     : App info kafka.producer for order-service-producer-1 unregistered
+2026-03-22T01:38:01.730-05:00  INFO 14004 --- [order-service] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-22T01:38:01.735-05:00  INFO 14004 --- [order-service] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-03-22T01:38:01.753-05:00  INFO 14004 --- [order-service] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
