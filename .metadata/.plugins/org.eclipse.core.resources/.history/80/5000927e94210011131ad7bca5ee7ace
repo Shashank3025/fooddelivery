@@ -1,5 +1,0 @@
-package com.fooddelivery.payment.kafka;
-
-public class PaymentConsumer {
-
-}

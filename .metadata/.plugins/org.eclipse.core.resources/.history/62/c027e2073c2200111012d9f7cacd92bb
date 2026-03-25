@@ -1,7 +1,0 @@
-package com.fooddelivery.notification.repository;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
-public interface DeliveryRepository extends JpaRepository<T, ID> {
-
-}

@@ -1,5 +1,0 @@
-package com.fooddelivery.payment.repository;
-
-public interface PaymentRepository {
-
-}

@@ -1,5 +1,0 @@
-package com.fooddelivery.delivery.kafka;
-
-public class KafkaProducerConfig {
-
-}

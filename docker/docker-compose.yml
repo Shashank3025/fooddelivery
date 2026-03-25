@@ -1,6 +1,10 @@
 version: '3.8'
 
 services:
+
+  # -----------------------------
+  # ZOOKEEPER
+  # -----------------------------
   zookeeper:
     image: confluentinc/cp-zookeeper:7.6.1
     container_name: zookeeper
@@ -10,17 +14,20 @@ services:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
 
+  # -----------------------------
+  # KAFKA (Internal + External)
+  # -----------------------------
   kafka:
     image: confluentinc/cp-kafka:7.6.1
     container_name: kafka
     ports:
-      - "9092:9092"     # internal listener
+      - "9092:9092"     # internal listener for Docker services
       - "29092:29092"   # external listener for Windows host
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
 
-      # FIXED LISTENERS (no duplicate ports)
+      # FIXED LISTENERS
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,EXTERNAL://0.0.0.0:29092
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,EXTERNAL://host.docker.internal:29092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
@@ -31,12 +38,18 @@ services:
     depends_on:
       - zookeeper
 
+  # -----------------------------
+  # ZIPKIN
+  # -----------------------------
   zipkin:
     image: openzipkin/zipkin:2.27
     container_name: zipkin
     ports:
       - "9411:9411"
 
+  # -----------------------------
+  # ELASTICSEARCH
+  # -----------------------------
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.11.1
     container_name: elasticsearch
@@ -46,6 +59,9 @@ services:
     ports:
       - "9200:9200"
 
+  # -----------------------------
+  # KIBANA
+  # -----------------------------
   kibana:
     image: docker.elastic.co/kibana/kibana:8.11.1
     container_name: kibana
@@ -53,3 +69,63 @@ services:
       - "5601:5601"
     depends_on:
       - elasticsearch
+
+  # -----------------------------
+  # ORDER SERVICE (needs docker profile)
+  # -----------------------------
+  order-service:
+    build: ../order-service
+    container_name: order-service
+    ports:
+      - "8083:8083"
+    depends_on:
+      - kafka
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+
+  # -----------------------------
+  # PAYMENT SERVICE (NO profile)
+  # -----------------------------
+  payment-service:
+    build: ../payment-service
+    container_name: payment-service
+    ports:
+      - "8084:8084"
+    depends_on:
+      - kafka
+
+  # -----------------------------
+  # DELIVERY SERVICE (NO profile)
+  # -----------------------------
+  delivery-service:
+    build: ../delivery-service
+    container_name: delivery-service
+    ports:
+      - "8085:8085"
+    depends_on:
+      - kafka
+
+  # -----------------------------
+  # NOTIFICATION SERVICE (NO profile)
+  # -----------------------------
+  notification-service:
+    build: ../notification-service
+    container_name: notification-service
+    ports:
+      - "8086:8086"
+    depends_on:
+      - kafka
+
+  # -----------------------------
+  # API GATEWAY (NO profile)
+  # -----------------------------
+  api-gateway:
+    build: ../api-gateway
+    container_name: api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - order-service
+      - payment-service
+      - delivery-service
+      - notification-service
