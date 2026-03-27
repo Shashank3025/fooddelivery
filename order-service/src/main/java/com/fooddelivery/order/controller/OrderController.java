@@ -34,5 +34,9 @@ public class OrderController {
     public List<Order> getUserOrders(@PathVariable Long userId){
         return queryService.getUserOrders(userId);
     }
+    @GetMapping("/load")
+    public String load() {
+        return "OK";
+    }
 
 }

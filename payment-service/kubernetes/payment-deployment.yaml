@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: payment-service
+  template:
+    metadata:
+      labels:
+        app: payment-service
+    spec:
+      containers:
+        - name: payment-service
+          image: payment-service:latest
+          ports:
+            - containerPort: 8084
+
+          env:
+            # Activate docker profile
+            - name: SPRING_PROFILES_ACTIVE
+              value: docker
+
+            # Kafka
+            - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
+              value: host.docker.internal:9092
+
+            # Database (if payment-service uses DB)
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://host.docker.internal:3306/foodservice
+            - name: SPRING_DATASOURCE_USERNAME
+              value: root
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: Shashank@2530
+
+          resources:
+            requests:
+              cpu: 100m
+            limits:
+              cpu: 200m
