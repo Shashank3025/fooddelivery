@@ -1,0 +1,205 @@
+2026-03-30T20:32:43.104-05:00  INFO 21144 --- [api-gateway] [main] [                                                 ] c.f.gateway.ApiGatewayApplication        : Starting ApiGatewayApplication using Java 23.0.2 with PID 21144 (C:\Users\shash\Documents\deliveryfood\api-gateway\target\classes started by shash in C:\Users\shash\Documents\deliveryfood\api-gateway)
+2026-03-30T20:32:43.177-05:00  INFO 21144 --- [api-gateway] [main] [                                                 ] c.f.gateway.ApiGatewayApplication        : No active profile set, falling back to 1 default profile: "default"
+2026-03-30T20:32:47.115-05:00  INFO 21144 --- [api-gateway] [main] [                                                 ] o.s.cloud.context.scope.GenericScope     : BeanFactory id=abbc3821-9303-34ce-af80-42d50a139195
+2026-03-30T20:32:50.166-05:00  INFO 21144 --- [api-gateway] [main] [                                                 ] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [After]
+2026-03-30T20:32:50.172-05:00  INFO 21144 --- [api-gateway] [main] [                                                 ] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Before]
+2026-03-30T20:32:50.176-05:00  INFO 21144 --- [api-gateway] [main] [                                                 ] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Between]
+2026-03-30T20:32:50.178-05:00  INFO 21144 --- [api-gateway] [main] [                                                 ] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Cookie]
+2026-03-30T20:32:50.183-05:00  INFO 21144 --- [api-gateway] [main] [                                                 ] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Header]
+2026-03-30T20:32:50.185-05:00  INFO 21144 --- [api-gateway] [main] [                                                 ] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Host]
+2026-03-30T20:32:50.187-05:00  INFO 21144 --- [api-gateway] [main] [                                                 ] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Method]
+2026-03-30T20:32:50.189-05:00  INFO 21144 --- [api-gateway] [main] [                                                 ] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Path]
+2026-03-30T20:32:50.196-05:00  INFO 21144 --- [api-gateway] [main] [                                                 ] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Query]
+2026-03-30T20:32:50.197-05:00  INFO 21144 --- [api-gateway] [main] [                                                 ] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [ReadBody]
+2026-03-30T20:32:50.197-05:00  INFO 21144 --- [api-gateway] [main] [                                                 ] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [RemoteAddr]
+2026-03-30T20:32:50.197-05:00  INFO 21144 --- [api-gateway] [main] [                                                 ] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2026-03-30T20:32:50.197-05:00  INFO 21144 --- [api-gateway] [main] [                                                 ] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Weight]
+2026-03-30T20:32:50.199-05:00  INFO 21144 --- [api-gateway] [main] [                                                 ] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2026-03-30T20:32:51.083-05:00  INFO 21144 --- [api-gateway] [main] [                                                 ] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2026-03-30T20:32:53.038-05:00  INFO 21144 --- [api-gateway] [main] [                                                 ] o.s.b.web.embedded.netty.NettyWebServer  : Netty started on port 8080
+2026-03-30T20:32:53.363-05:00  INFO 21144 --- [api-gateway] [main] [                                                 ] c.f.gateway.ApiGatewayApplication        : Started ApiGatewayApplication in 12.618 seconds (process running for 14.744)
+2026-03-30T20:41:25.043-05:00  WARN 21144 --- [api-gateway] [AsyncReporter{org.springframework.boot.actuate.autoconfigure.tracing.zipkin.ZipkinWebClientSender@373709b5}] [                                                 ] z.r.AsyncReporter$BoundedAsyncReporter   : Spans were dropped due to exceptions. All subsequent errors will be logged at FINE level.
+2026-03-30T20:41:25.080-05:00  WARN 21144 --- [api-gateway] [AsyncReporter{org.springframework.boot.actuate.autoconfigure.tracing.zipkin.ZipkinWebClientSender@373709b5}] [                                                 ] z.r.AsyncReporter$BoundedAsyncReporter   : Dropped 4 spans due to WebClientRequestException(Connection refused: getsockopt: localhost/127.0.0.1:9411)
+
+org.springframework.web.reactive.function.client.WebClientRequestException: Connection refused: getsockopt: localhost/127.0.0.1:9411
+	at org.springframework.web.reactive.function.client.ExchangeFunctions$DefaultExchangeFunction.lambda$wrapException$9(ExchangeFunctions.java:136) ~[spring-webflux-6.1.3.jar:6.1.3]
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ Request to POST http://localhost:9411/api/v2/spans [DefaultWebClient]
+Original Stack Trace:
+		at org.springframework.web.reactive.function.client.ExchangeFunctions$DefaultExchangeFunction.lambda$wrapException$9(ExchangeFunctions.java:136) ~[spring-webflux-6.1.3.jar:6.1.3]
+		at reactor.core.publisher.MonoErrorSupplied.subscribe(MonoErrorSupplied.java:55) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4512) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onError(FluxOnErrorResume.java:103) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.onError(FluxPeek.java:222) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.onError(FluxPeek.java:222) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.onError(FluxPeek.java:222) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.core.publisher.MonoNext$NextSubscriber.onError(MonoNext.java:93) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.core.publisher.MonoFlatMapMany$FlatMapManyMain.onError(MonoFlatMapMany.java:205) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.core.publisher.SerializedSubscriber.onError(SerializedSubscriber.java:124) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.core.publisher.FluxRetryWhen$RetryWhenMainSubscriber.whenError(FluxRetryWhen.java:229) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.core.publisher.FluxRetryWhen$RetryWhenOtherSubscriber.onError(FluxRetryWhen.java:279) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onError(FluxContextWrite.java:121) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.core.publisher.FluxConcatMapNoPrefetch$FluxConcatMapNoPrefetchSubscriber.maybeOnError(FluxConcatMapNoPrefetch.java:327) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.core.publisher.FluxConcatMapNoPrefetch$FluxConcatMapNoPrefetchSubscriber.onNext(FluxConcatMapNoPrefetch.java:212) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onNext(FluxContextWrite.java:107) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.core.publisher.SinkManyEmitterProcessor.drain(SinkManyEmitterProcessor.java:476) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.core.publisher.SinkManyEmitterProcessor$EmitterInner.drainParent(SinkManyEmitterProcessor.java:620) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.core.publisher.FluxPublish$PubSubInner.request(FluxPublish.java:874) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.request(FluxContextWrite.java:136) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.core.publisher.FluxConcatMapNoPrefetch$FluxConcatMapNoPrefetchSubscriber.request(FluxConcatMapNoPrefetch.java:337) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.request(FluxContextWrite.java:136) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.core.publisher.Operators$DeferredSubscription.request(Operators.java:1743) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.core.publisher.FluxRetryWhen$RetryWhenMainSubscriber.onError(FluxRetryWhen.java:196) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.core.publisher.MonoCreate$DefaultMonoSink.error(MonoCreate.java:205) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.netty.http.client.HttpClientConnect$MonoHttpConnect$ClientTransportSubscriber.onError(HttpClientConnect.java:311) ~[reactor-netty-http-1.1.15.jar:1.1.15]
+		at reactor.core.publisher.MonoCreate$DefaultMonoSink.error(MonoCreate.java:205) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.netty.resources.DefaultPooledConnectionProvider$DisposableAcquire.onError(DefaultPooledConnectionProvider.java:172) ~[reactor-netty-core-1.1.15.jar:1.1.15]
+		at reactor.netty.internal.shaded.reactor.pool.AbstractPool$Borrower.fail(AbstractPool.java:488) ~[reactor-netty-core-1.1.15.jar:1.1.15]
+		at reactor.netty.internal.shaded.reactor.pool.SimpleDequePool.lambda$drainLoop$9(SimpleDequePool.java:436) ~[reactor-netty-core-1.1.15.jar:1.1.15]
+		at reactor.core.publisher.FluxDoOnEach$DoOnEachSubscriber.onError(FluxDoOnEach.java:186) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.core.publisher.MonoCreate$DefaultMonoSink.error(MonoCreate.java:205) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.netty.resources.DefaultPooledConnectionProvider$PooledConnectionAllocator$PooledConnectionInitializer.onError(DefaultPooledConnectionProvider.java:583) ~[reactor-netty-core-1.1.15.jar:1.1.15]
+		at reactor.core.publisher.MonoFlatMap$FlatMapMain.secondError(MonoFlatMap.java:241) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.core.publisher.MonoFlatMap$FlatMapInner.onError(MonoFlatMap.java:315) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onError(FluxOnErrorResume.java:106) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.core.publisher.Operators.error(Operators.java:198) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.core.publisher.MonoError.subscribe(MonoError.java:53) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4512) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onError(FluxOnErrorResume.java:103) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.netty.transport.TransportConnector$MonoChannelPromise.tryFailure(TransportConnector.java:576) ~[reactor-netty-core-1.1.15.jar:1.1.15]
+		at reactor.netty.transport.TransportConnector$MonoChannelPromise.setFailure(TransportConnector.java:522) ~[reactor-netty-core-1.1.15.jar:1.1.15]
+		at reactor.netty.transport.TransportConnector.lambda$doConnect$7(TransportConnector.java:261) ~[reactor-netty-core-1.1.15.jar:1.1.15]
+		at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:590) ~[netty-common-4.1.105.Final.jar:4.1.105.Final]
+		at io.netty.util.concurrent.DefaultPromise.notifyListeners0(DefaultPromise.java:583) ~[netty-common-4.1.105.Final.jar:4.1.105.Final]
+		at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:559) ~[netty-common-4.1.105.Final.jar:4.1.105.Final]
+		at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:492) ~[netty-common-4.1.105.Final.jar:4.1.105.Final]
+		at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:636) ~[netty-common-4.1.105.Final.jar:4.1.105.Final]
+		at io.netty.util.concurrent.DefaultPromise.setFailure0(DefaultPromise.java:629) ~[netty-common-4.1.105.Final.jar:4.1.105.Final]
+		at io.netty.util.concurrent.DefaultPromise.tryFailure(DefaultPromise.java:118) ~[netty-common-4.1.105.Final.jar:4.1.105.Final]
+		at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.fulfillConnectPromise(AbstractNioChannel.java:322) ~[netty-transport-4.1.105.Final.jar:4.1.105.Final]
+		at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:338) ~[netty-transport-4.1.105.Final.jar:4.1.105.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:776) ~[netty-transport-4.1.105.Final.jar:4.1.105.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724) ~[netty-transport-4.1.105.Final.jar:4.1.105.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650) ~[netty-transport-4.1.105.Final.jar:4.1.105.Final]
+		at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562) ~[netty-transport-4.1.105.Final.jar:4.1.105.Final]
+		at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997) ~[netty-common-4.1.105.Final.jar:4.1.105.Final]
+		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.1.105.Final.jar:4.1.105.Final]
+		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.1.105.Final.jar:4.1.105.Final]
+		at java.base/java.lang.Thread.run(Thread.java:1575) ~[na:na]
+	Suppressed: java.lang.Exception: #block terminated with an error
+		at reactor.core.publisher.BlockingSingleSubscriber.blockingGet(BlockingSingleSubscriber.java:103) ~[reactor-core-3.6.2.jar:3.6.2]
+		at reactor.core.publisher.Mono.block(Mono.java:1728) ~[reactor-core-3.6.2.jar:3.6.2]
+		at org.springframework.boot.actuate.autoconfigure.tracing.zipkin.ZipkinWebClientSender$WebClientHttpPostCall.doExecute(ZipkinWebClientSender.java:76) ~[spring-boot-actuator-autoconfigure-3.2.2.jar:3.2.2]
+		at org.springframework.boot.actuate.autoconfigure.tracing.zipkin.ZipkinWebClientSender$WebClientHttpPostCall.doExecute(ZipkinWebClientSender.java:54) ~[spring-boot-actuator-autoconfigure-3.2.2.jar:3.2.2]
+		at zipkin2.Call$Base.execute(Call.java:391) ~[zipkin-2.23.2.jar:na]
+		at zipkin2.reporter.AsyncReporter$BoundedAsyncReporter.flush(AsyncReporter.java:299) ~[zipkin-reporter-2.16.3.jar:na]
+		at zipkin2.reporter.AsyncReporter$Flusher.run(AsyncReporter.java:378) ~[zipkin-reporter-2.16.3.jar:na]
+		at java.base/java.lang.Thread.run(Thread.java:1575) ~[na:na]
+Caused by: io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: getsockopt: localhost/127.0.0.1:9411
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682) ~[na:na]
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1062) ~[na:na]
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:337) ~[netty-transport-4.1.105.Final.jar:4.1.105.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:335) ~[netty-transport-4.1.105.Final.jar:4.1.105.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:776) ~[netty-transport-4.1.105.Final.jar:4.1.105.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724) ~[netty-transport-4.1.105.Final.jar:4.1.105.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650) ~[netty-transport-4.1.105.Final.jar:4.1.105.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562) ~[netty-transport-4.1.105.Final.jar:4.1.105.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997) ~[netty-common-4.1.105.Final.jar:4.1.105.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.1.105.Final.jar:4.1.105.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.1.105.Final.jar:4.1.105.Final]
+	at java.base/java.lang.Thread.run(Thread.java:1575) ~[na:na]
+
+2026-03-30T20:52:08.647-05:00  INFO 36396 --- [api-gateway] [main] [                                                 ] c.f.gateway.ApiGatewayApplication        : Starting ApiGatewayApplication using Java 23.0.2 with PID 36396 (C:\Users\shash\Documents\deliveryfood\api-gateway\target\classes started by shash in C:\Users\shash\Documents\deliveryfood\api-gateway)
+2026-03-30T20:52:08.656-05:00  INFO 36396 --- [api-gateway] [main] [                                                 ] c.f.gateway.ApiGatewayApplication        : No active profile set, falling back to 1 default profile: "default"
+2026-03-30T20:52:12.912-05:00  INFO 36396 --- [api-gateway] [main] [                                                 ] o.s.cloud.context.scope.GenericScope     : BeanFactory id=abbc3821-9303-34ce-af80-42d50a139195
+2026-03-30T20:52:16.014-05:00  INFO 36396 --- [api-gateway] [main] [                                                 ] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [After]
+2026-03-30T20:52:16.017-05:00  INFO 36396 --- [api-gateway] [main] [                                                 ] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Before]
+2026-03-30T20:52:16.018-05:00  INFO 36396 --- [api-gateway] [main] [                                                 ] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Between]
+2026-03-30T20:52:16.019-05:00  INFO 36396 --- [api-gateway] [main] [                                                 ] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Cookie]
+2026-03-30T20:52:16.021-05:00  INFO 36396 --- [api-gateway] [main] [                                                 ] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Header]
+2026-03-30T20:52:16.021-05:00  INFO 36396 --- [api-gateway] [main] [                                                 ] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Host]
+2026-03-30T20:52:16.021-05:00  INFO 36396 --- [api-gateway] [main] [                                                 ] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Method]
+2026-03-30T20:52:16.021-05:00  INFO 36396 --- [api-gateway] [main] [                                                 ] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Path]
+2026-03-30T20:52:16.024-05:00  INFO 36396 --- [api-gateway] [main] [                                                 ] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Query]
+2026-03-30T20:52:16.025-05:00  INFO 36396 --- [api-gateway] [main] [                                                 ] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [ReadBody]
+2026-03-30T20:52:16.028-05:00  INFO 36396 --- [api-gateway] [main] [                                                 ] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [RemoteAddr]
+2026-03-30T20:52:16.029-05:00  INFO 36396 --- [api-gateway] [main] [                                                 ] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2026-03-30T20:52:16.029-05:00  INFO 36396 --- [api-gateway] [main] [                                                 ] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Weight]
+2026-03-30T20:52:16.031-05:00  INFO 36396 --- [api-gateway] [main] [                                                 ] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2026-03-30T20:52:16.926-05:00  INFO 36396 --- [api-gateway] [main] [                                                 ] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2026-03-30T20:52:18.810-05:00  INFO 36396 --- [api-gateway] [main] [                                                 ] o.s.b.web.embedded.netty.NettyWebServer  : Netty started on port 8080
+2026-03-30T20:52:19.025-05:00  INFO 36396 --- [api-gateway] [main] [                                                 ] c.f.gateway.ApiGatewayApplication        : Started ApiGatewayApplication in 12.728 seconds (process running for 14.727)
+2026-03-30T20:53:08.484-05:00  WARN 36396 --- [api-gateway] [AsyncReporter{org.springframework.boot.actuate.autoconfigure.tracing.zipkin.ZipkinWebClientSender@9fe8698}] [                                                 ] z.r.AsyncReporter$BoundedAsyncReporter   : Spans were dropped due to exceptions. All subsequent errors will be logged at FINE level.
+2026-03-30T20:53:08.519-05:00  WARN 36396 --- [api-gateway] [AsyncReporter{org.springframework.boot.actuate.autoconfigure.tracing.zipkin.ZipkinWebClientSender@9fe8698}] [                                                 ] z.r.AsyncReporter$BoundedAsyncReporter   : Dropped 1 spans due to ReactiveException(java.util.concurrent.TimeoutException: Did not observe any item or terminal signal within 1000ms in 'flatMap' (and no fallback has been configured))
+
+reactor.core.Exceptions$ReactiveException: java.util.concurrent.TimeoutException: Did not observe any item or terminal signal within 1000ms in 'flatMap' (and no fallback has been configured)
+	at reactor.core.Exceptions.propagate(Exceptions.java:408) ~[reactor-core-3.6.2.jar:3.6.2]
+	at reactor.core.publisher.BlockingSingleSubscriber.blockingGet(BlockingSingleSubscriber.java:101) ~[reactor-core-3.6.2.jar:3.6.2]
+	at reactor.core.publisher.Mono.block(Mono.java:1728) ~[reactor-core-3.6.2.jar:3.6.2]
+	at org.springframework.boot.actuate.autoconfigure.tracing.zipkin.ZipkinWebClientSender$WebClientHttpPostCall.doExecute(ZipkinWebClientSender.java:76) ~[spring-boot-actuator-autoconfigure-3.2.2.jar:3.2.2]
+	at org.springframework.boot.actuate.autoconfigure.tracing.zipkin.ZipkinWebClientSender$WebClientHttpPostCall.doExecute(ZipkinWebClientSender.java:54) ~[spring-boot-actuator-autoconfigure-3.2.2.jar:3.2.2]
+	at zipkin2.Call$Base.execute(Call.java:391) ~[zipkin-2.23.2.jar:na]
+	at zipkin2.reporter.AsyncReporter$BoundedAsyncReporter.flush(AsyncReporter.java:299) ~[zipkin-reporter-2.16.3.jar:na]
+	at zipkin2.reporter.AsyncReporter$Flusher.run(AsyncReporter.java:378) ~[zipkin-reporter-2.16.3.jar:na]
+	at java.base/java.lang.Thread.run(Thread.java:1575) ~[na:na]
+	Suppressed: java.lang.Exception: #block terminated with an error
+		at reactor.core.publisher.BlockingSingleSubscriber.blockingGet(BlockingSingleSubscriber.java:103) ~[reactor-core-3.6.2.jar:3.6.2]
+		... 7 common frames omitted
+Caused by: java.util.concurrent.TimeoutException: Did not observe any item or terminal signal within 1000ms in 'flatMap' (and no fallback has been configured)
+	at reactor.core.publisher.FluxTimeout$TimeoutMainSubscriber.handleTimeout(FluxTimeout.java:296) ~[reactor-core-3.6.2.jar:3.6.2]
+	at reactor.core.publisher.FluxTimeout$TimeoutMainSubscriber.doTimeout(FluxTimeout.java:281) ~[reactor-core-3.6.2.jar:3.6.2]
+	at reactor.core.publisher.FluxTimeout$TimeoutTimeoutSubscriber.onNext(FluxTimeout.java:420) ~[reactor-core-3.6.2.jar:3.6.2]
+	at reactor.core.publisher.FluxOnErrorReturn$ReturnSubscriber.onNext(FluxOnErrorReturn.java:162) ~[reactor-core-3.6.2.jar:3.6.2]
+	at reactor.core.publisher.MonoDelay$MonoDelayRunnable.propagateDelay(MonoDelay.java:270) ~[reactor-core-3.6.2.jar:3.6.2]
+	at reactor.core.publisher.MonoDelay$MonoDelayRunnable.run(MonoDelay.java:285) ~[reactor-core-3.6.2.jar:3.6.2]
+	at reactor.core.scheduler.SchedulerTask.call(SchedulerTask.java:68) ~[reactor-core-3.6.2.jar:3.6.2]
+	at reactor.core.scheduler.SchedulerTask.call(SchedulerTask.java:28) ~[reactor-core-3.6.2.jar:3.6.2]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[na:na]
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[na:na]
+	... 1 common frames omitted
+
+2026-03-30T20:57:12.310-05:00  INFO 8088 --- [api-gateway] [main] c.f.gateway.ApiGatewayApplication        : Starting ApiGatewayApplication using Java 23.0.2 with PID 8088 (C:\Users\shash\Documents\deliveryfood\api-gateway\target\classes started by shash in C:\Users\shash\Documents\deliveryfood\api-gateway)
+2026-03-30T20:57:12.320-05:00  INFO 8088 --- [api-gateway] [main] c.f.gateway.ApiGatewayApplication        : No active profile set, falling back to 1 default profile: "default"
+2026-03-30T20:57:17.912-05:00  INFO 8088 --- [api-gateway] [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=b71cab08-f2a9-34d8-9b9e-d895fe0ac28f
+2026-03-30T20:57:23.258-05:00  INFO 8088 --- [api-gateway] [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [After]
+2026-03-30T20:57:23.260-05:00  INFO 8088 --- [api-gateway] [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Before]
+2026-03-30T20:57:23.262-05:00  INFO 8088 --- [api-gateway] [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Between]
+2026-03-30T20:57:23.262-05:00  INFO 8088 --- [api-gateway] [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Cookie]
+2026-03-30T20:57:23.264-05:00  INFO 8088 --- [api-gateway] [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Header]
+2026-03-30T20:57:23.265-05:00  INFO 8088 --- [api-gateway] [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Host]
+2026-03-30T20:57:23.265-05:00  INFO 8088 --- [api-gateway] [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Method]
+2026-03-30T20:57:23.267-05:00  INFO 8088 --- [api-gateway] [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Path]
+2026-03-30T20:57:23.268-05:00  INFO 8088 --- [api-gateway] [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Query]
+2026-03-30T20:57:23.269-05:00  INFO 8088 --- [api-gateway] [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [ReadBody]
+2026-03-30T20:57:23.269-05:00  INFO 8088 --- [api-gateway] [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [RemoteAddr]
+2026-03-30T20:57:23.271-05:00  INFO 8088 --- [api-gateway] [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2026-03-30T20:57:23.273-05:00  INFO 8088 --- [api-gateway] [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Weight]
+2026-03-30T20:57:23.273-05:00  INFO 8088 --- [api-gateway] [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2026-03-30T20:57:24.165-05:00  INFO 8088 --- [api-gateway] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2026-03-30T20:57:28.081-05:00  INFO 8088 --- [api-gateway] [main] o.s.b.web.embedded.netty.NettyWebServer  : Netty started on port 8080
+2026-03-30T20:57:28.329-05:00  INFO 8088 --- [api-gateway] [main] c.f.gateway.ApiGatewayApplication        : Started ApiGatewayApplication in 18.903 seconds (process running for 20.961)
+2026-03-30T21:31:27.571-05:00  INFO 3656 --- [api-gateway] [main] c.f.gateway.ApiGatewayApplication        : Starting ApiGatewayApplication using Java 23.0.2 with PID 3656 (C:\Users\shash\Documents\deliveryfood\api-gateway\target\classes started by shash in C:\Users\shash\Documents\deliveryfood\api-gateway)
+2026-03-30T21:31:27.578-05:00  INFO 3656 --- [api-gateway] [main] c.f.gateway.ApiGatewayApplication        : No active profile set, falling back to 1 default profile: "default"
+2026-03-30T21:31:32.533-05:00  INFO 3656 --- [api-gateway] [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=b71cab08-f2a9-34d8-9b9e-d895fe0ac28f
+2026-03-30T21:31:36.651-05:00  INFO 3656 --- [api-gateway] [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [After]
+2026-03-30T21:31:36.651-05:00  INFO 3656 --- [api-gateway] [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Before]
+2026-03-30T21:31:36.653-05:00  INFO 3656 --- [api-gateway] [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Between]
+2026-03-30T21:31:36.654-05:00  INFO 3656 --- [api-gateway] [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Cookie]
+2026-03-30T21:31:36.655-05:00  INFO 3656 --- [api-gateway] [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Header]
+2026-03-30T21:31:36.656-05:00  INFO 3656 --- [api-gateway] [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Host]
+2026-03-30T21:31:36.657-05:00  INFO 3656 --- [api-gateway] [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Method]
+2026-03-30T21:31:36.658-05:00  INFO 3656 --- [api-gateway] [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Path]
+2026-03-30T21:31:36.659-05:00  INFO 3656 --- [api-gateway] [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Query]
+2026-03-30T21:31:36.662-05:00  INFO 3656 --- [api-gateway] [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [ReadBody]
+2026-03-30T21:31:36.663-05:00  INFO 3656 --- [api-gateway] [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [RemoteAddr]
+2026-03-30T21:31:36.663-05:00  INFO 3656 --- [api-gateway] [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2026-03-30T21:31:36.663-05:00  INFO 3656 --- [api-gateway] [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Weight]
+2026-03-30T21:31:36.665-05:00  INFO 3656 --- [api-gateway] [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2026-03-30T21:31:37.544-05:00  INFO 3656 --- [api-gateway] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2026-03-30T21:31:39.947-05:00  INFO 3656 --- [api-gateway] [main] o.s.b.web.embedded.netty.NettyWebServer  : Netty started on port 8080
+2026-03-30T21:31:40.195-05:00  INFO 3656 --- [api-gateway] [main] c.f.gateway.ApiGatewayApplication        : Started ApiGatewayApplication in 15.275 seconds (process running for 17.149)

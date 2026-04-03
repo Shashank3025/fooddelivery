@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,10 +36,17 @@ public class RestaurantController
 	@PostMapping
     public Restaurant addRestaurant(@RequestBody Restaurant restaurant) 
 	{
-		System.out.println(restaurant.getName());
-        Restaurant savedRestaurant=restaurantService.saveRestaurant(restaurant);
-        kafkaTemplate.send("restaurant-event", "restuarant added: " + savedRestaurant.getName() + " id " + savedRestaurant.getId());
-        return savedRestaurant;
+		Restaurant savedRestaurant=restaurantService.saveRestaurant(restaurant);
+		try {
+	        kafkaTemplate.send(
+	            "restaurant-event",
+	            "restaurant added: " + savedRestaurant.getName() + " id " + savedRestaurant.getId()
+	        );
+	        System.out.println("Kafka event sent for restaurant");
+	    } catch (Exception e) {
+	        System.out.println("Kafka send failed: " + e.getMessage());
+	    }
+		return savedRestaurant;
     }
 	
 	@GetMapping("/name/{name}")
@@ -59,10 +67,20 @@ public class RestaurantController
     {
         Restaurant restaurant = restaurantService.getRestaurantById(id);
         menuItem.setRestaurant(restaurant);
-        MenuItem savedMenu=menuItemService.addMenuItem(menuItem);
-        kafkaTemplate.send("restaurant-event","Menu item added: " + savedMenu.getName() + " for restaurant " + id);
-        return savedMenu;
 
+        MenuItem savedMenu = menuItemService.addMenuItem(menuItem);
+
+        try {
+            kafkaTemplate.send(
+                "restaurant-event",
+                "menu item added: " + savedMenu.getName() + " for restaurant " + id
+            );
+            System.out.println("Kafka event sent for menu");
+        } catch (Exception e) {
+            System.out.println("Kafka send failed: " + e.getMessage());
+        }
+
+        return savedMenu;
     }
 
 

@@ -1,0 +1,381 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #f6f9fc;
+}
+
+.manager-page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(255, 111, 97, 0.18), transparent 22%),
+    radial-gradient(circle at top right, rgba(0, 194, 255, 0.14), transparent 20%),
+    radial-gradient(circle at bottom left, rgba(255, 214, 10, 0.14), transparent 24%),
+    linear-gradient(180deg, #fff8f3 0%, #f7fbff 45%, #eef6ff 100%);
+  color: #14213d;
+}
+
+/* HERO */
+.manager-hero {
+  position: relative;
+  min-height: 340px;
+  padding: 70px 24px 90px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    linear-gradient(135deg, rgba(255, 98, 0, 0.92), rgba(255, 0, 122, 0.84), rgba(0, 194, 255, 0.82)),
+    linear-gradient(120deg, #ff7a18, #ff3d81, #00c2ff);
+}
+
+.manager-hero::before,
+.manager-hero::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(8px);
+  opacity: 0.35;
+  animation: floatGlow 8s ease-in-out infinite;
+}
+
+.manager-hero::before {
+  width: 260px;
+  height: 260px;
+  top: 30px;
+  left: 8%;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.manager-hero::after {
+  width: 220px;
+  height: 220px;
+  right: 10%;
+  bottom: 25px;
+  background: rgba(255, 230, 109, 0.45);
+  animation-delay: 1.5s;
+}
+
+.manager-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.18), transparent 20%),
+    radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.14), transparent 18%),
+    radial-gradient(circle at 60% 80%, rgba(255, 255, 255, 0.12), transparent 20%);
+}
+
+.manager-hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1200px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.manager-tag {
+  display: inline-block;
+  margin: 0 0 18px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.manager-hero-content h1 {
+  margin: 0 0 14px;
+  font-size: 56px;
+  line-height: 1.05;
+  font-weight: 800;
+  letter-spacing: -1px;
+  text-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+}
+
+.manager-hero-content > p:last-child {
+  margin: 0 auto;
+  max-width: 700px;
+  font-size: 18px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* MAIN CONTENT */
+.manager-content {
+  width: 100%;
+  max-width: 1250px;
+  margin: -54px auto 0;
+  padding: 0 24px 48px;
+  position: relative;
+  z-index: 5;
+}
+
+/* ACTION CARDS */
+.manager-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-bottom: 30px;
+}
+
+.manager-action-card {
+  position: relative;
+  display: block;
+  padding: 28px 24px;
+  text-decoration: none;
+  color: #13233a;
+  border-radius: 26px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 20px 45px rgba(30, 41, 59, 0.12);
+  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+}
+
+.manager-action-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(255, 122, 24, 0.14), rgba(255, 61, 129, 0.08), rgba(0, 194, 255, 0.08));
+  opacity: 1;
+}
+
+.manager-action-card::after {
+  content: "";
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  right: -55px;
+  top: -55px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.42);
+  filter: blur(4px);
+}
+
+.manager-action-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+.manager-action-card h3 {
+  margin: 0 0 10px;
+  font-size: 24px;
+  font-weight: 800;
+  color: #13233a;
+}
+
+.manager-action-card p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #4a607d;
+  max-width: 300px;
+}
+
+.manager-action-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 28px 55px rgba(30, 41, 59, 0.16);
+  border-color: rgba(255, 255, 255, 0.95);
+}
+
+/* LIST SECTION */
+.manager-list-section {
+  padding: 28px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 20px 50px rgba(26, 35, 53, 0.1);
+}
+
+.manager-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.manager-list-header h2 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 800;
+  color: #11233c;
+}
+
+.manager-list-header span {
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #153150;
+  background: linear-gradient(135deg, rgba(255, 205, 86, 0.4), rgba(0, 194, 255, 0.18));
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+/* STATUS */
+.manager-status {
+  padding: 28px 20px;
+  text-align: center;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #4c6078;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.75), rgba(243, 248, 255, 0.88));
+  border: 1px dashed rgba(107, 139, 173, 0.35);
+}
+
+/* RESTAURANT GRID */
+.manager-restaurant-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.manager-restaurant-card {
+  position: relative;
+  padding: 24px;
+  border-radius: 24px;
+  overflow: hidden;
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.95), rgba(245, 250, 255, 0.88));
+  border: 1px solid rgba(227, 237, 250, 0.95);
+  box-shadow: 0 16px 38px rgba(29, 48, 78, 0.1);
+  transition: transform 0.26s ease, box-shadow 0.26s ease;
+}
+
+.manager-restaurant-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(90deg, #ff7a18, #ff3d81, #00c2ff);
+}
+
+.manager-restaurant-card::after {
+  content: "";
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  right: -45px;
+  bottom: -45px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255, 122, 24, 0.12), rgba(0, 194, 255, 0.12));
+}
+
+.manager-restaurant-card h3 {
+  position: relative;
+  z-index: 2;
+  margin: 0 0 10px;
+  font-size: 23px;
+  font-weight: 800;
+  color: #11233c;
+}
+
+.manager-restaurant-card p {
+  position: relative;
+  z-index: 2;
+  margin: 0 0 18px;
+  color: #59708c;
+  line-height: 1.7;
+  font-size: 15px;
+  min-height: 48px;
+}
+
+.restaurant-id {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  color: #17314f;
+  background: linear-gradient(135deg, rgba(255, 234, 167, 0.75), rgba(186, 230, 253, 0.72));
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.manager-restaurant-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 46px rgba(29, 48, 78, 0.16);
+}
+
+/* ANIMATION */
+@keyframes floatGlow {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-16px) translateX(10px);
+  }
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 1100px) {
+  .manager-actions,
+  .manager-restaurant-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .manager-hero-content h1 {
+    font-size: 46px;
+  }
+}
+
+@media (max-width: 768px) {
+  .manager-hero {
+    min-height: 290px;
+    padding: 50px 18px 80px;
+  }
+
+  .manager-hero-content h1 {
+    font-size: 34px;
+  }
+
+  .manager-hero-content > p:last-child {
+    font-size: 16px;
+  }
+
+  .manager-content {
+    padding: 0 16px 30px;
+    margin-top: -42px;
+  }
+
+  .manager-actions,
+  .manager-restaurant-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .manager-list-section {
+    padding: 20px;
+    border-radius: 24px;
+  }
+
+  .manager-list-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .manager-action-card,
+  .manager-restaurant-card {
+    border-radius: 20px;
+  }
+}
