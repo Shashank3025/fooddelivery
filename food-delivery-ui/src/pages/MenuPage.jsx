@@ -27,7 +27,7 @@ function MenuPage() {
 
   const loadMenu = async () => {
     try {
-      const res = await api.get(`/restaurants/${id}/menu?page=0&size=20`);
+      const res = await api.get(`/api/restaurants/${id}/menu?page=0&size=20`);
       setMenuItems(res.data.content || []);
     } catch (err) {
       console.error("Failed to load menu:", err);
@@ -39,13 +39,13 @@ function MenuPage() {
 
   const addToCart = (item) => {
     setCart((prev) => {
-      const existing = prev.find((cartItem) => cartItem.menuItemId === item.id);
+      const existing = prev.find((c) => c.menuItemId === item.id);
 
       if (existing) {
-        return prev.map((cartItem) =>
-          cartItem.menuItemId === item.id
-            ? { ...cartItem, quantity: cartItem.quantity + 1, name: item.name, price: item.price }
-            : cartItem
+        return prev.map((c) =>
+          c.menuItemId === item.id
+            ? { ...c, quantity: c.quantity + 1 }
+            : c
         );
       }
 
@@ -61,11 +61,11 @@ function MenuPage() {
     });
   };
 
-  const decreaseQuantity = (itemId) => {
+  const decreaseQuantity = (id) => {
     setCart((prev) =>
       prev
         .map((item) =>
-          item.menuItemId === itemId
+          item.menuItemId === id
             ? { ...item, quantity: item.quantity - 1 }
             : item
         )
@@ -73,32 +73,29 @@ function MenuPage() {
     );
   };
 
-  const getQuantity = (itemId) => {
-    const item = cart.find((cartItem) => cartItem.menuItemId === itemId);
+  const getQuantity = (id) => {
+    const item = cart.find((c) => c.menuItemId === id);
     return item ? item.quantity : 0;
   };
 
-  const totalItems = useMemo(() => {
-    return cart.reduce((sum, item) => sum + item.quantity, 0);
-  }, [cart]);
+  const totalItems = useMemo(
+    () => cart.reduce((sum, item) => sum + item.quantity, 0),
+    [cart]
+  );
 
-  const totalPrice = useMemo(() => {
-    return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  }, [cart]);
+  const totalPrice = useMemo(
+    () => cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
+    [cart]
+  );
 
   const placeOrder = async () => {
-    if (cart.length === 0) {
-      alert("Please add at least one item");
-      return;
-    }
-
-    const userId = Number(localStorage.getItem("userId")) || 1;
+    if (cart.length === 0) return alert("Add items first");
 
     try {
       setPlacingOrder(true);
 
-      await api.post("/orders", {
-        userId,
+      await api.post("/api/orders", {
+        userId: 1,
         restaurantId: Number(id),
         status: "PENDING",
         items: cart.map((item) => ({
@@ -107,11 +104,11 @@ function MenuPage() {
         })),
       });
 
-      alert("Order placed successfully");
+      alert("Order placed!");
       setCart([]);
       navigate("/orders");
     } catch (err) {
-      console.error("Order failed:", err);
+      console.error(err);
       alert("Order failed");
     } finally {
       setPlacingOrder(false);
@@ -120,111 +117,103 @@ function MenuPage() {
 
   return (
     <div className="menu-page">
-      <section className="menu-hero">
-        <div className="menu-hero-overlay"></div>
-        <div className="menu-hero-content">
-          <p className="menu-tag">🍽️ Curated Menu</p>
-          <h1>Choose your favorite dishes</h1>
-          <p>Freshly prepared meals from your selected restaurant.</p>
-        </div>
-      </section>
 
-      <section className="menu-content">
-        <div className="menu-left">
-          <div className="section-title-row">
-            <h2>Menu Items</h2>
-            <span>{menuItems.length} items</span>
+      {/* TOP SECTION */}
+      <div className="top-section">
+
+        {/* HERO LEFT */}
+        <div className="hero">
+          <div className="hero-overlay"></div>
+          <div className="hero-content">
+            <p className="tag">🍽️ Curated Menu</p>
+            <h1>Choose your favorite dishes</h1>
+            <p>Freshly prepared meals from your selected restaurant.</p>
+          </div>
+        </div>
+
+        {/* CART RIGHT */}
+        <div className="cart-card">
+          <h2>Your Cart</h2>
+
+          {cart.length === 0 ? (
+            <p className="empty">Your cart is empty</p>
+          ) : (
+            cart.map((item) => (
+              <div key={item.menuItemId} className="cart-item">
+                <span>{item.name}</span>
+                <span>{item.quantity}</span>
+              </div>
+            ))
+          )}
+
+          <div className="cart-summary">
+            <div>
+              <span>Total Items</span>
+              <span>{totalItems}</span>
+            </div>
+            <div className="cart-items-container">
+  {cart.length === 0 ? (
+    <p className="empty">Your cart is empty</p>
+  ) : (
+    cart.map((item) => (
+      <div key={item.menuItemId} className="cart-item">
+        <span>{item.name}</span>
+        <span>{item.quantity}</span>
+      </div>
+    ))
+  )}
+</div>
+
+            <div>
+              <span>Total Price</span>
+              <span>${totalPrice.toFixed(2)}</span>
+            </div>
           </div>
 
-          {loading ? (
-            <div className="menu-status">Loading menu...</div>
-          ) : menuItems.length === 0 ? (
-            <div className="menu-status">No menu items found.</div>
-          ) : (
-            <div className="menu-grid">
-              {menuItems.map((item, index) => (
-                <div key={item.id} className="menu-card">
-                  <img
-                    src={`${foodImages[index % foodImages.length]}?auto=format&fit=crop&w=1200&q=80`}
-                    alt={item.name}
-                  />
+          <button onClick={placeOrder} disabled={placingOrder}>
+            {placingOrder ? "Placing..." : "Place Order"}
+          </button>
+        </div>
+      </div>
 
-                  <div className="menu-card-body">
-                    <h3>{item.name}</h3>
-                    <p className="menu-desc">Delicious chef-prepared food made fresh for every order.</p>
+      {/* MENU SECTION BELOW */}
+      <div className="menu-section">
+        <h2>Menu Items</h2>
 
-                    <div className="menu-bottom-row">
-                      <span className="price">${Number(item.price).toFixed(2)}</span>
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <div className="menu-grid">
+            {menuItems.map((item, index) => (
+              <div key={item.id} className="menu-card">
 
-                      <div className="qty-controls">
-                        <button
-                          className="qty-btn minus"
-                          onClick={() => decreaseQuantity(item.id)}
-                        >
-                          -
-                        </button>
+                <img
+                  src={`${foodImages[index % foodImages.length]}?auto=format&fit=crop&w=1200&q=80`}
+                  alt={item.name}
+                />
 
-                        <span className="qty-value">{getQuantity(item.id)}</span>
+                <div className="card-body">
+                  <h3>{item.name}</h3>
+                  <p>Fresh & delicious food</p>
 
-                        <button
-                          className="qty-btn plus"
-                          onClick={() => addToCart(item)}
-                        >
-                          +
-                        </button>
-                      </div>
+                  <div className="bottom">
+                    <span className="price">
+                      ${Number(item.price).toFixed(2)}
+                    </span>
+
+                    <div className="qty">
+                      <button onClick={() => decreaseQuantity(item.id)}>-</button>
+                      <span>{getQuantity(item.id)}</span>
+                      <button onClick={() => addToCart(item)}>+</button>
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
-          )}
-        </div>
 
-        <div className="menu-right">
-          <div className="cart-card">
-            <h2>Your Cart</h2>
-            <p className="cart-subtitle">Review your order before checkout</p>
-
-            {cart.length === 0 ? (
-              <div className="empty-cart">Your cart is empty.</div>
-            ) : (
-              <div className="cart-items">
-                {cart.map((item) => (
-                  <div key={item.menuItemId} className="cart-item">
-                    <div>
-                      <h4>{item.name}</h4>
-                      <p>
-                        {item.quantity} × ${Number(item.price).toFixed(2)}
-                      </p>
-                    </div>
-                    <span>${(item.quantity * item.price).toFixed(2)}</span>
-                  </div>
-                ))}
               </div>
-            )}
-
-            <div className="cart-summary">
-              <div className="summary-row">
-                <span>Total Items</span>
-                <span>{totalItems}</span>
-              </div>
-              <div className="summary-row total">
-                <span>Total Price</span>
-                <span>${totalPrice.toFixed(2)}</span>
-              </div>
-            </div>
-
-            <button
-              className="place-order-btn"
-              onClick={placeOrder}
-              disabled={placingOrder}
-            >
-              {placingOrder ? "Placing Order..." : "Place Order"}
-            </button>
+            ))}
           </div>
-        </div>
-      </section>
+        )}
+      </div>
     </div>
   );
 }

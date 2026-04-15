@@ -11,7 +11,7 @@ import com.fooddelivery.user.service.UserService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserController {
 
@@ -21,7 +21,7 @@ public class UserController {
     
     private static final String TOPIC = "user-events";
 
-    @PostMapping
+    @PostMapping({"", "/"})
     public User createUser(@RequestBody User user) {
         User savedUser = userService.createUser(user);
         // Publish Kafka event

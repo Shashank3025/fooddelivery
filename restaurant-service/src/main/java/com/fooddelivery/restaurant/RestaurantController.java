@@ -33,7 +33,7 @@ public class RestaurantController
 	
 	private final KafkaTemplate<String,String> kafkaTemplate;
 	
-	@PostMapping
+	@PostMapping({"", "/"})
     public Restaurant addRestaurant(@RequestBody Restaurant restaurant) 
 	{
 		Restaurant savedRestaurant=restaurantService.saveRestaurant(restaurant);
@@ -56,7 +56,7 @@ public class RestaurantController
 		return restaurantService.getRestaurantByName(name);
 	}
 
-    @GetMapping
+	@GetMapping({"", "/"})
     public List<Restaurant> getAllRestaurants() 
     {
         return restaurantService.getAllRestaurants();

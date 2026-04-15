@@ -32,7 +32,7 @@ function AddRestaurantPage() {
     try {
       setLoading(true);
 
-      await api.post("/restaurants", {
+      await api.post("/api/restaurants", {
         name: form.name,
         address: form.address,
       });

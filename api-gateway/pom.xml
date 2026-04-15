@@ -22,7 +22,6 @@
         <spring-cloud.version>2023.0.1</spring-cloud.version>
     </properties>
 
-    <!-- Spring Cloud BOM -->
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -37,42 +36,47 @@
 
     <dependencies>
 
-    <!-- API Gateway -->
-    <dependency>
-        <groupId>org.springframework.cloud</groupId>
-        <artifactId>spring-cloud-starter-gateway</artifactId>
-    </dependency>
-	<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-test</artifactId>
-    <scope>test</scope>
-</dependency>
-    <!-- Actuator -->
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-actuator</artifactId>
-    </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
+        </dependency>
 
-    
-	<!-- Tracing (MODERN WAY) -->
-<dependency>
-    <groupId>io.micrometer</groupId>
-    <artifactId>micrometer-tracing-bridge-brave</artifactId>
-</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
 
-<!-- Zipkin Reporter (needed for zipkin2 imports) -->
-<dependency>
-    <groupId>io.zipkin.reporter2</groupId>
-    <artifactId>zipkin-reporter-brave</artifactId>
-</dependency>
-    
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-tracing-bridge-brave</artifactId>
+        </dependency>
 
-    <!-- Lombok -->
-    <dependency>
-        <groupId>org.projectlombok</groupId>
-        <artifactId>lombok</artifactId>
-        <optional>true</optional>
-    </dependency>
+        <dependency>
+            <groupId>io.zipkin.reporter2</groupId>
+            <artifactId>zipkin-reporter-brave</artifactId>
+        </dependency>
 
-</dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

@@ -31,7 +31,7 @@ function AddMenuItemPage() {
     setLoading(true);
 
     try {
-      await api.post(`/restaurants/${form.restaurantId}/menu`, {
+      await api.post(`/api/restaurants/${form.restaurantId}/menu`, {
         name: form.name,
         price: parseFloat(form.price),
       });

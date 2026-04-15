@@ -6,6 +6,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import com.fooddelivery.order.entity.Order;
+import com.fooddelivery.order.entity.OrderItem;
 import com.fooddelivery.order.repository.OrderRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -15,12 +16,18 @@ import lombok.RequiredArgsConstructor;
 public class OrderCommandService {
 
     private final OrderRepository orderRepository;
-    private final KafkaTemplate<String,String> kafkaTemplate;
+    private final KafkaTemplate<String, String> kafkaTemplate;
 
-    public Order createOrder(Order order){
+    public Order createOrder(Order order) {
 
         order.setStatus("CREATED");
         order.setCreatedAt(LocalDateTime.now());
+
+        if (order.getItems() != null) {
+            for (OrderItem item : order.getItems()) {
+                item.setOrder(order);
+            }
+        }
 
         Order savedOrder = orderRepository.save(order);
 
@@ -32,5 +39,4 @@ public class OrderCommandService {
 
         return savedOrder;
     }
-
 }

@@ -22,10 +22,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class OrderController {
 
-	private final OrderCommandService commandService;
+    private final OrderCommandService commandService;
     private final OrderQueryService queryService;
 
-    @PostMapping
+    @PostMapping({"", "/"})
     public Order createOrder(@RequestBody Order order){
         return commandService.createOrder(order);
     }
@@ -34,9 +34,9 @@ public class OrderController {
     public List<Order> getUserOrders(@PathVariable Long userId){
         return queryService.getUserOrders(userId);
     }
+
     @GetMapping("/load")
     public String load() {
         return "OK";
     }
-
 }

@@ -3,8 +3,11 @@ package com.fooddelivery.order.entity;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,7 +18,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="orders")
+@Table(name = "orders")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,13 +29,11 @@ public class Order {
     private Long id;
 
     private Long userId;
-
     private Long restaurantId;
-
     private String status;
-
     private LocalDateTime createdAt;
 
-    @OneToMany(mappedBy="order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<OrderItem> items;
 }

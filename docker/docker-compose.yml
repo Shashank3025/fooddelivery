@@ -1,10 +1,6 @@
-version: '3.8'
-
+     
 services:
 
-  # -----------------------------
-  # ZOOKEEPER
-  # -----------------------------
   zookeeper:
     image: confluentinc/cp-zookeeper:7.6.1
     container_name: zookeeper
@@ -13,119 +9,182 @@ services:
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
+    restart: always
+    networks:
+      - default
 
-  # -----------------------------
-  # KAFKA (Internal + External)
-  # -----------------------------
   kafka:
     image: confluentinc/cp-kafka:7.6.1
     container_name: kafka
+    depends_on:
+      - zookeeper
     ports:
-      - "9092:9092"     # internal listener for Docker services
-      - "29092:29092"   # external listener for Windows host
+      - "9092:9092"
+      - "29092:29092"
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-
-      # FIXED LISTENERS
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,EXTERNAL://0.0.0.0:29092
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,EXTERNAL://host.docker.internal:29092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,EXTERNAL://localhost:29092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    restart: always
+    networks:
+      - default
 
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "Shashank@2530"
+      MYSQL_DATABASE: foodservice
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: always
+    networks:
+      - default
+
+  user-service:
+    build: ../user-service
+    container_name: user-service
     depends_on:
-      - zookeeper
+      mysql:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    ports:
+      - "8081:8081"
+    restart: always
+    networks:
+      - default
 
-  # -----------------------------
-  # ZIPKIN
-  # -----------------------------
+  restaurant-service:
+    build: ../restaurant-service
+    container_name: restaurant-service
+    depends_on:
+      - mysql
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    ports:
+      - "8082:8082"
+    restart: always
+    networks:
+      - default
+
+  order-service:
+    build: ../order-service
+    container_name: order-service
+    depends_on:
+      - mysql
+      - kafka
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    ports:
+      - "8083:8083"
+    restart: always
+    networks:
+      - default
+
+  payment-service:
+    build: ../payment-service
+    container_name: payment-service
+    depends_on:
+      - mysql
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    ports:
+      - "8084:8084"
+    restart: always
+    networks:
+      - default
+
+  delivery-service:
+    build: ../delivery-service
+    container_name: delivery-service
+    depends_on:
+      - mysql
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    ports:
+      - "8085:8085"
+    restart: always
+    networks:
+      - default
+
+  notification-service:
+    build: ../notification-service
+    container_name: notification-service
+    depends_on:
+      - kafka
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    ports:
+      - "8086:8086"
+    restart: always
+    networks:
+      - default
+
   zipkin:
-    image: openzipkin/zipkin:2.27
+    image: openzipkin/zipkin
     container_name: zipkin
     ports:
       - "9411:9411"
+    restart: always
+    networks:
+      - default
 
-  # -----------------------------
-  # ELASTICSEARCH
-  # -----------------------------
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.11.1
     container_name: elasticsearch
     environment:
       - discovery.type=single-node
-      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - xpack.security.enabled=false
     ports:
       - "9200:9200"
+    restart: always
+    networks:
+      - default
 
-  # -----------------------------
-  # KIBANA
-  # -----------------------------
   kibana:
     image: docker.elastic.co/kibana/kibana:8.11.1
     container_name: kibana
-    ports:
-      - "5601:5601"
     depends_on:
       - elasticsearch
-
-  # -----------------------------
-  # ORDER SERVICE (needs docker profile)
-  # -----------------------------
-  order-service:
-    build: ../order-service
-    container_name: order-service
     ports:
-      - "8083:8083"
-    depends_on:
-      - kafka
-    environment:
-      SPRING_PROFILES_ACTIVE: docker
+      - "5601:5601"
+    restart: always
+    networks:
+      - default
 
-  # -----------------------------
-  # PAYMENT SERVICE (NO profile)
-  # -----------------------------
-  payment-service:
-    build: ../payment-service
-    container_name: payment-service
-    ports:
-      - "8084:8084"
-    depends_on:
-      - kafka
-
-  # -----------------------------
-  # DELIVERY SERVICE (NO profile)
-  # -----------------------------
-  delivery-service:
-    build: ../delivery-service
-    container_name: delivery-service
-    ports:
-      - "8085:8085"
-    depends_on:
-      - kafka
-
-  # -----------------------------
-  # NOTIFICATION SERVICE (NO profile)
-  # -----------------------------
-  notification-service:
-    build: ../notification-service
-    container_name: notification-service
-    ports:
-      - "8086:8086"
-    depends_on:
-      - kafka
-
-  # -----------------------------
-  # API GATEWAY (NO profile)
-  # -----------------------------
   api-gateway:
     build: ../api-gateway
     container_name: api-gateway
-    ports:
-      - "8080:8080"
     depends_on:
+      - user-service
+      - restaurant-service
       - order-service
       - payment-service
       - delivery-service
       - notification-service
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    ports:
+      - "8080:8080"
+    restart: always
+    networks:
+      - default
+
+volumes:
+  mysql_data:
+
+networks:
+  default:
+    driver: bridge

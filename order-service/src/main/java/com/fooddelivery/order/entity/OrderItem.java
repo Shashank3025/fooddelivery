@@ -1,5 +1,7 @@
 package com.fooddelivery.order.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,7 +14,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="order_items")
+@Table(name = "order_items")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,10 +25,10 @@ public class OrderItem {
     private Long id;
 
     private Long menuItemId;
-
     private Integer quantity;
 
     @ManyToOne
-    @JoinColumn(name="order_id")
+    @JoinColumn(name = "order_id")
+    @JsonBackReference
     private Order order;
 }
