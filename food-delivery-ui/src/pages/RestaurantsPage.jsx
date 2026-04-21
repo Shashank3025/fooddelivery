@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import api from "../api/api";
 import "./RestaurantsPage.css";
 
+import AgentChatbot from "./AgentChatbot";
+
 const restaurantImages = [
   "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4",
   "https://images.unsplash.com/photo-1552566626-52f8b828add9",
@@ -18,9 +20,17 @@ function RestaurantsPage() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+  const username = localStorage.getItem("username") || "User";
+  const userId = localStorage.getItem("userId");
+
   useEffect(() => {
+    if (!userId) {
+      navigate("/login");
+      return;
+    }
+
     loadRestaurants();
-  }, []);
+  }, [userId, navigate]);
 
   const loadRestaurants = async () => {
     try {
@@ -48,13 +58,38 @@ function RestaurantsPage() {
     navigate(`/restaurants/${restaurantId}/menu`);
   };
 
+  const goToOrders = () => {
+    navigate("/orders");
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("userId");
+    localStorage.removeItem("username");
+    navigate("/login");
+  };
+
   return (
     <div className="restaurants-page">
       <section className="hero-section">
         <div className="hero-overlay"></div>
 
         <div className="hero-content">
-          <p className="hero-tag">🍔 FoodExpress</p>
+          <div className="hero-topbar">
+            <div className="hero-user">
+              <p className="hero-tag">🍔 FoodExpress</p>
+              <span className="user-badge">Hi, {username}</span>
+            </div>
+
+            <div className="hero-actions">
+              <button className="orders-btn" onClick={goToOrders}>
+                My Orders
+              </button>
+              <button className="logout-btn" onClick={handleLogout}>
+                Logout
+              </button>
+            </div>
+          </div>
+
           <h1>Discover the best food near you</h1>
           <p className="hero-subtitle">
             Fresh meals, fast delivery, and top restaurants all in one place.
@@ -120,6 +155,8 @@ function RestaurantsPage() {
           </div>
         )}
       </section>
+      {/* ✅ ADD CHATBOT HERE */}
+<AgentChatbot />
     </div>
   );
 }

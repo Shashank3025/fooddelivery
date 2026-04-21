@@ -15,13 +15,12 @@ public class OrderQueryService {
 
     private final OrderRepository orderRepository;
 
-    public List<Order> getUserOrders(Long userId){
+    public List<Order> getUserOrders(Long userId) {
         return orderRepository.findByUserId(userId);
     }
 
-    public Order getOrder(Long orderId){
+    public Order getOrder(Long orderId) {
         return orderRepository.findById(orderId)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
     }
-
 }

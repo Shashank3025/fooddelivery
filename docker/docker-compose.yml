@@ -1,4 +1,3 @@
-     
 services:
 
   zookeeper:
@@ -132,6 +131,22 @@ services:
     networks:
       - default
 
+  # ============================
+  # AGENT SERVICE (added cleanly)
+  # ============================
+  agent-service:
+    build: ../agent-service
+    container_name: agent-service
+    depends_on:
+      - mysql
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    ports:
+      - "8088:8088"
+    restart: always
+    networks:
+      - default
+
   zipkin:
     image: openzipkin/zipkin
     container_name: zipkin
@@ -174,6 +189,7 @@ services:
       - payment-service
       - delivery-service
       - notification-service
+      - agent-service
     environment:
       SPRING_PROFILES_ACTIVE: docker
     ports:

@@ -1,19 +1,32 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import api from "../api/api";
 import "./LoginPage.css";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    if (!email.trim()) {
-      alert("Please enter your email");
-      return;
-    }
+  const handleLogin = async () => {
+    try {
+      const res = await api.post("/api/users/login", { email, password });
 
-    localStorage.setItem("userEmail", email);
-    navigate("/restaurants");
+      localStorage.setItem("userId", res.data.id);
+      localStorage.setItem("userName", res.data.name);
+      localStorage.setItem("userEmail", res.data.email);
+
+      alert("Login successful");
+      navigate("/restaurants");
+    } catch (err) {
+      const msg =
+        err.response?.data?.message ||
+        err.response?.data?.error ||
+        err.response?.data ||
+        "Invalid email or password";
+
+      alert(msg);
+    }
   };
 
   return (
@@ -27,7 +40,7 @@ function LoginPage() {
       <div className="login-card">
         <div className="brand">🍔 FoodExpress</div>
         <h2>Welcome Back</h2>
-        <p className="subtitle">Hot meals. Fast delivery. Anytime.</p>
+        <p className="subtitle">Login to continue your food journey.</p>
 
         <input
           type="email"
@@ -36,10 +49,17 @@ function LoginPage() {
           onChange={(e) => setEmail(e.target.value)}
         />
 
-        <button onClick={handleLogin}>Continue</button>
+        <input
+          type="password"
+          placeholder="Enter password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
+        
+        <button type="button" onClick={handleLogin}>Login</button>
         <p className="bottom-text">
-          New here? <Link to="/register">Create account</Link>
+          Don't have an account? <Link to="/register">Register</Link>
         </p>
       </div>
     </div>

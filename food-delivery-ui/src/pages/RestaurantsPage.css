@@ -31,6 +31,22 @@
   max-width: 900px;
 }
 
+.hero-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.hero-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
 .hero-tag {
   display: inline-block;
   margin-bottom: 12px;
@@ -40,6 +56,50 @@
   font-size: 14px;
   font-weight: 600;
   color: #ffd54f;
+}
+
+.user-badge {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  backdrop-filter: blur(6px);
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.orders-btn,
+.logout-btn {
+  border: none;
+  border-radius: 14px;
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.orders-btn {
+  background: linear-gradient(90deg, #6c63ff, #7f7bff);
+  color: #fff;
+}
+
+.logout-btn {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.orders-btn:hover,
+.logout-btn:hover {
+  transform: translateY(-1px);
 }
 
 .hero-content h1 {
@@ -224,5 +284,14 @@
 
   .restaurant-card img {
     height: 200px;
+  }
+
+  .hero-topbar {
+    justify-content: center;
+  }
+
+  .hero-actions {
+    width: 100%;
+    justify-content: center;
   }
 }

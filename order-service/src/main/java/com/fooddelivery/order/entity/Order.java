@@ -13,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,10 +31,24 @@ public class Order {
 
     private Long userId;
     private Long restaurantId;
+    private String restaurantName;
     private String status;
     private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<OrderItem> items;
+
+    @Transient
+    public Double getTotalPrice() {
+        if (items == null) return 0.0;
+
+        return items.stream()
+                .mapToDouble(item -> {
+                    double price = item.getItemPrice() != null ? item.getItemPrice() : 0.0;
+                    int qty = item.getQuantity() != null ? item.getQuantity() : 0;
+                    return price * qty;
+                })
+                .sum();
+    }
 }

@@ -61,7 +61,11 @@ public class RestaurantController
     {
         return restaurantService.getAllRestaurants();
     }
-
+	@GetMapping("/{id}")
+	public Restaurant getRestaurantById(@PathVariable Long id) {
+	    kafkaTemplate.send("restaurant-event", "finding restaurant by id: " + id);
+	    return restaurantService.getRestaurantById(id);
+	}
     @PostMapping("/{id}/menu")
     public MenuItem addMenuItem(@PathVariable Long id, @RequestBody MenuItem menuItem) 
     {

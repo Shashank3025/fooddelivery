@@ -20,10 +20,21 @@ function MenuPage() {
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
   const [placingOrder, setPlacingOrder] = useState(false);
+  const [restaurantName, setRestaurantName] = useState("");
 
   useEffect(() => {
     loadMenu();
+    loadRestaurant();
   }, [id]);
+
+  const loadRestaurant = async () => {
+    try {
+      const res = await api.get(`/api/restaurants/${id}`);
+      setRestaurantName(res.data?.name || "");
+    } catch (err) {
+      console.error("Failed to load restaurant:", err);
+    }
+  };
 
   const loadMenu = async () => {
     try {
@@ -54,8 +65,10 @@ function MenuPage() {
         {
           menuItemId: item.id,
           quantity: 1,
+          itemName: item.name,
+          itemPrice: Number(item.price),
           name: item.name,
-          price: item.price,
+          price: Number(item.price),
         },
       ];
     });
@@ -94,12 +107,17 @@ function MenuPage() {
     try {
       setPlacingOrder(true);
 
+      const userId = Number(localStorage.getItem("userId")) || 1;
+
       await api.post("/api/orders", {
-        userId: 1,
+        userId,
         restaurantId: Number(id),
+        restaurantName,
         status: "PENDING",
         items: cart.map((item) => ({
           menuItemId: item.menuItemId,
+          itemName: item.itemName || item.name,
+          itemPrice: Number(item.itemPrice ?? item.price ?? 0),
           quantity: item.quantity,
         })),
       });
@@ -117,11 +135,7 @@ function MenuPage() {
 
   return (
     <div className="menu-page">
-
-      {/* TOP SECTION */}
       <div className="top-section">
-
-        {/* HERO LEFT */}
         <div className="hero">
           <div className="hero-overlay"></div>
           <div className="hero-content">
@@ -131,7 +145,6 @@ function MenuPage() {
           </div>
         </div>
 
-        {/* CART RIGHT */}
         <div className="cart-card">
           <h2>Your Cart</h2>
 
@@ -151,18 +164,19 @@ function MenuPage() {
               <span>Total Items</span>
               <span>{totalItems}</span>
             </div>
+
             <div className="cart-items-container">
-  {cart.length === 0 ? (
-    <p className="empty">Your cart is empty</p>
-  ) : (
-    cart.map((item) => (
-      <div key={item.menuItemId} className="cart-item">
-        <span>{item.name}</span>
-        <span>{item.quantity}</span>
-      </div>
-    ))
-  )}
-</div>
+              {cart.length === 0 ? (
+                <p className="empty">Your cart is empty</p>
+              ) : (
+                cart.map((item) => (
+                  <div key={item.menuItemId} className="cart-item">
+                    <span>{item.name}</span>
+                    <span>{item.quantity}</span>
+                  </div>
+                ))
+              )}
+            </div>
 
             <div>
               <span>Total Price</span>
@@ -176,7 +190,6 @@ function MenuPage() {
         </div>
       </div>
 
-      {/* MENU SECTION BELOW */}
       <div className="menu-section">
         <h2>Menu Items</h2>
 
@@ -186,7 +199,6 @@ function MenuPage() {
           <div className="menu-grid">
             {menuItems.map((item, index) => (
               <div key={item.id} className="menu-card">
-
                 <img
                   src={`${foodImages[index % foodImages.length]}?auto=format&fit=crop&w=1200&q=80`}
                   alt={item.name}
@@ -208,7 +220,6 @@ function MenuPage() {
                     </div>
                   </div>
                 </div>
-
               </div>
             ))}
           </div>

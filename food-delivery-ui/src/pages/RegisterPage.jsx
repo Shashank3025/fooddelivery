@@ -7,6 +7,7 @@ function RegisterPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleRegister = async () => {
@@ -15,22 +16,11 @@ function RegisterPage() {
         name,
         email,
         phone,
+        password,
       });
-
-      if (res.data?.id) {
-        localStorage.setItem("userId", res.data.id);
-      }
-
-      if (res.data?.name) {
-        localStorage.setItem("userName", res.data.name);
-      }
-
-      if (res.data?.email) {
-        localStorage.setItem("userEmail", res.data.email);
-      }
-
+      console.log("Registered user:", res.data);
       alert("Registration successful");
-      navigate("/restaurants");
+      navigate("/");
     } catch (err) {
       console.error("Registration error:", err);
       alert("Registration failed");
@@ -48,9 +38,7 @@ function RegisterPage() {
       <div className="register-card">
         <div className="brand">🍔 FoodExpress</div>
         <h2>Create Account</h2>
-        <p className="subtitle">
-          Join now and get your favorite food delivered fast.
-        </p>
+        <p className="subtitle">Join now and get your favorite food delivered fast.</p>
 
         <input
           type="text"
@@ -71,6 +59,13 @@ function RegisterPage() {
           placeholder="Enter phone number"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
+        />
+
+        <input
+          type="password"
+          placeholder="Enter password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
 
         <button onClick={handleRegister}>Create Account</button>

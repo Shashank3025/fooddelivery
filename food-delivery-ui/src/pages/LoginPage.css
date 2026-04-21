@@ -6,7 +6,7 @@
   align-items: center;
   overflow: hidden;
   font-family: "Poppins", sans-serif;
-  background: url("https://images.unsplash.com/photo-1504674900247-0877df9cc836")
+  background: url("https://images.unsplash.com/photo-1600891964599-f61ba0e24092")
     no-repeat center center/cover;
 }
 
@@ -14,8 +14,8 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(135deg, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.58)),
-    linear-gradient(45deg, rgba(255, 87, 34, 0.18), rgba(0, 200, 83, 0.16));
+    linear-gradient(135deg, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.6)),
+    linear-gradient(45deg, rgba(255, 87, 34, 0.14), rgba(0, 200, 83, 0.14));
   z-index: 1;
 }
 
@@ -24,29 +24,30 @@
   border-radius: 50%;
   z-index: 2;
   opacity: 0.35;
+  filter: blur(2px);
 }
 
 .shape1 {
   width: 220px;
   height: 220px;
   background: #ff6b35;
-  top: 8%;
-  left: 12%;
+  top: 12%;
+  left: 10%;
 }
 
 .shape2 {
   width: 180px;
   height: 180px;
   background: #00c853;
-  bottom: 10%;
-  right: 14%;
+  bottom: 12%;
+  right: 12%;
 }
 
 .shape3 {
-  width: 120px;
-  height: 120px;
+  width: 130px;
+  height: 130px;
   background: #ffd54f;
-  top: 18%;
+  top: 20%;
   right: 22%;
 }
 
@@ -56,7 +57,7 @@
   width: 420px;
   padding: 42px 34px;
   border-radius: 24px;
-  background: rgba(18, 18, 18, 0.92);
+  background: rgba(18, 18, 18, 0.94);
   border: 2px solid rgba(255, 255, 255, 0.08);
   box-shadow:
     0 20px 60px rgba(0, 0, 0, 0.55),
@@ -116,8 +117,8 @@
 }
 
 .login-card input:focus {
-  border-color: #00c853;
-  box-shadow: 0 0 0 4px rgba(0, 200, 83, 0.15);
+  border-color: #ff6b35;
+  box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.15);
 }
 
 .login-card button {
@@ -125,19 +126,19 @@
   padding: 15px;
   border: none;
   border-radius: 14px;
-  background: linear-gradient(90deg, #00c853, #00e676);
+  background: linear-gradient(90deg, #ff6b35, #ff8a50);
   color: white;
   font-size: 18px;
   font-weight: 700;
   cursor: pointer;
   margin-top: 4px;
   transition: 0.25s ease;
-  box-shadow: 0 10px 25px rgba(0, 200, 83, 0.28);
+  box-shadow: 0 10px 25px rgba(255, 107, 53, 0.28);
 }
 
 .login-card button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(0, 200, 83, 0.38);
+  box-shadow: 0 14px 30px rgba(255, 107, 53, 0.4);
 }
 
 .bottom-text {
