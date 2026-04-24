@@ -7,12 +7,13 @@ import OrdersPage from "./pages/OrdersPage";
 import ManagerDashboard from "./pages/ManagerDashboard";
 import AddRestaurantPage from "./pages/AddRestaurantPage";
 import AddMenuItemPage from "./pages/AddMenuItemPage";
-
+import SplashScreen from "./pages/SplashScreen";
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LoginPage />} />
+        <Route path="/" element={<SplashScreen />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/restaurants" element={<RestaurantsPage />} />
         <Route path="/restaurants/:id/menu" element={<MenuPage />} />

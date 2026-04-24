@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
-import axios from "axios";
+import api from "../api/api";
 import "./AgentChatbot.css";
 
 const AGENTS = {
@@ -10,7 +10,7 @@ const AGENTS = {
     icon: "🛵",
     placeholder: 'e.g. "Order Burger"',
     welcome:
-      "Hey there! I'm your Order Agent.\nTell me what you'd like and I'll place the order right away.\n\nTry: \"Order Burger\" or \"Order Chicken Biryani\"",
+      'Hey there! I\'m your Order Agent.\nTell me what you\'d like and I\'ll place the order right away.\n\nTry: "Order Burger" or "Order Chicken Biryani"',
   },
   ai: {
     id: "ai",
@@ -124,13 +124,10 @@ const AgentChatbot = () => {
 
     try {
       if (currentAgent === "rules") {
-        const { data } = await axios.post(
-          "http://localhost:8080/api/agent/place-order",
-          {
-            userId,
-            message: userMessage,
-          }
-        );
+        const { data } = await api.post("/agent/place-order", {
+          userId,
+          message: userMessage,
+        });
 
         if (data.status === "SUCCESS" && data.createdOrder) {
           addMessage(currentAgent, "bot", {
@@ -163,13 +160,10 @@ const AgentChatbot = () => {
           });
         }
       } else {
-        const { data } = await axios.post(
-          "http://localhost:8080/api/ai-agent/chat",
-          {
-            userId,
-            message: userMessage,
-          }
-        );
+        const { data } = await api.post("/ai-agent/chat", {
+          userId,
+          message: userMessage,
+        });
 
         addMessage(currentAgent, "bot", {
           type: "text",
@@ -259,9 +253,7 @@ const AgentChatbot = () => {
                 <button
                   key={a.id}
                   className={`acb-switch-btn ${
-                    activeAgent === a.id
-                      ? `active active--${activeAgent}`
-                      : ""
+                    activeAgent === a.id ? `active active--${activeAgent}` : ""
                   }`}
                   onClick={() => switchAgent(a.id)}
                 >

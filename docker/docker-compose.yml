@@ -1,10 +1,7 @@
 services:
-
   zookeeper:
     image: confluentinc/cp-zookeeper:7.6.1
     container_name: zookeeper
-    ports:
-      - "2181:2181"
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -17,15 +14,12 @@ services:
     container_name: kafka
     depends_on:
       - zookeeper
-    ports:
-      - "9092:9092"
-      - "29092:29092"
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,EXTERNAL://0.0.0.0:29092
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,EXTERNAL://localhost:29092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     restart: always
@@ -35,10 +29,8 @@ services:
   mysql:
     image: mysql:8.0
     container_name: mysql
-    ports:
-      - "3307:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: "Shashank@2530"
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: foodservice
     volumes:
       - mysql_data:/var/lib/mysql
@@ -47,102 +39,6 @@ services:
       interval: 5s
       timeout: 5s
       retries: 20
-    restart: always
-    networks:
-      - default
-
-  user-service:
-    build: ../user-service
-    container_name: user-service
-    depends_on:
-      mysql:
-        condition: service_healthy
-    environment:
-      SPRING_PROFILES_ACTIVE: docker
-    ports:
-      - "8081:8081"
-    restart: always
-    networks:
-      - default
-
-  restaurant-service:
-    build: ../restaurant-service
-    container_name: restaurant-service
-    depends_on:
-      - mysql
-    environment:
-      SPRING_PROFILES_ACTIVE: docker
-    ports:
-      - "8082:8082"
-    restart: always
-    networks:
-      - default
-
-  order-service:
-    build: ../order-service
-    container_name: order-service
-    depends_on:
-      - mysql
-      - kafka
-    environment:
-      SPRING_PROFILES_ACTIVE: docker
-    ports:
-      - "8083:8083"
-    restart: always
-    networks:
-      - default
-
-  payment-service:
-    build: ../payment-service
-    container_name: payment-service
-    depends_on:
-      - mysql
-    environment:
-      SPRING_PROFILES_ACTIVE: docker
-    ports:
-      - "8084:8084"
-    restart: always
-    networks:
-      - default
-
-  delivery-service:
-    build: ../delivery-service
-    container_name: delivery-service
-    depends_on:
-      - mysql
-    environment:
-      SPRING_PROFILES_ACTIVE: docker
-    ports:
-      - "8085:8085"
-    restart: always
-    networks:
-      - default
-
-  notification-service:
-    build: ../notification-service
-    container_name: notification-service
-    depends_on:
-      - kafka
-    environment:
-      SPRING_PROFILES_ACTIVE: docker
-    ports:
-      - "8086:8086"
-    restart: always
-    networks:
-      - default
-
-  # ============================
-  # AGENT SERVICE (added cleanly)
-  # ============================
-  agent-service:
-    build: ../agent-service
-    container_name: agent-service
-    depends_on:
-      - mysql
-    environment:
-      SPRING_PROFILES_ACTIVE: docker
-    ports:
-      - "8088:8088"
     restart: always
     networks:
       - default
@@ -160,10 +56,8 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.11.1
     container_name: elasticsearch
     environment:
-      - discovery.type=single-node
-      - xpack.security.enabled=false
-    ports:
-      - "9200:9200"
+      discovery.type: single-node
+      xpack.security.enabled: "false"
     restart: always
     networks:
       - default
@@ -175,6 +69,141 @@ services:
       - elasticsearch
     ports:
       - "5601:5601"
+    restart: always
+    networks:
+      - default
+
+  user-service:
+    build: ../user-service
+    container_name: user-service
+    depends_on:
+      mysql:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      DB_URL: jdbc:mysql://mysql:3306/foodservice?allowPublicKeyRetrieval=true&useSSL=false&autoReconnect=true
+      DB_USERNAME: root
+      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      ZIPKIN_BASE_URL: http://zipkin:9411
+      ZIPKIN_ENDPOINT: http://zipkin:9411/api/v2/spans
+    restart: always
+    networks:
+      - default
+
+  restaurant-service:
+    build: ../restaurant-service
+    container_name: restaurant-service
+    depends_on:
+      mysql:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      DB_URL: jdbc:mysql://mysql:3306/foodservice
+      DB_USERNAME: root
+      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      ZIPKIN_BASE_URL: http://zipkin:9411
+      ZIPKIN_ENDPOINT: http://zipkin:9411/api/v2/spans
+    restart: always
+    networks:
+      - default
+
+  order-service:
+    build: ../order-service
+    container_name: order-service
+    depends_on:
+      mysql:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      DB_URL: jdbc:mysql://mysql:3306/foodservice
+      DB_USERNAME: root
+      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      ZIPKIN_BASE_URL: http://zipkin:9411
+      ZIPKIN_ENDPOINT: http://zipkin:9411/api/v2/spans
+    restart: always
+    networks:
+      - default
+
+  payment-service:
+    build: ../payment-service
+    container_name: payment-service
+    depends_on:
+      mysql:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      DB_URL: jdbc:mysql://mysql:3306/foodservice
+      DB_USERNAME: root
+      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      ZIPKIN_BASE_URL: http://zipkin:9411
+      ZIPKIN_ENDPOINT: http://zipkin:9411/api/v2/spans
+    restart: always
+    networks:
+      - default
+
+  delivery-service:
+    build: ../delivery-service
+    container_name: delivery-service
+    depends_on:
+      mysql:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      DB_URL: jdbc:mysql://mysql:3306/foodservice
+      DB_USERNAME: root
+      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      ZIPKIN_BASE_URL: http://zipkin:9411
+      ZIPKIN_ENDPOINT: http://zipkin:9411/api/v2/spans
+    restart: always
+    networks:
+      - default
+
+  notification-service:
+    build: ../notification-service
+    container_name: notification-service
+    depends_on:
+      kafka:
+        condition: service_started
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      ZIPKIN_BASE_URL: http://zipkin:9411
+      ZIPKIN_ENDPOINT: http://zipkin:9411/api/v2/spans
+    restart: always
+    networks:
+      - default
+
+  agent-service:
+    build: ../agent-service
+    container_name: agent-service
+    depends_on:
+      mysql:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      DB_URL: jdbc:mysql://mysql:3306/foodservice
+      DB_USERNAME: root
+      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      ZIPKIN_BASE_URL: http://zipkin:9411
+      ZIPKIN_ENDPOINT: http://zipkin:9411/api/v2/spans
     restart: always
     networks:
       - default
@@ -192,6 +221,9 @@ services:
       - agent-service
     environment:
       SPRING_PROFILES_ACTIVE: docker
+      FRONTEND_ORIGIN: http://13.220.221.12
+      ZIPKIN_BASE_URL: http://zipkin:9411
+      ZIPKIN_ENDPOINT: http://zipkin:9411/api/v2/spans
     ports:
       - "8080:8080"
     restart: always

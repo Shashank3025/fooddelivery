@@ -167,3 +167,16 @@
     font-size: 28px;
   }
 }
+.brand-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.brand-logo img {
+  width: 140px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 18px rgba(255, 106, 0, 0.55));
+}

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../api/api";
 import "./LoginPage.css";
-
+import logo from "../assets/logo.png";
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -10,7 +10,7 @@ function LoginPage() {
 
   const handleLogin = async () => {
     try {
-      const res = await api.post("/api/users/login", { email, password });
+      const res = await api.post("/users/login", { email, password });
 
       localStorage.setItem("userId", res.data.id);
       localStorage.setItem("userName", res.data.name);
@@ -38,7 +38,9 @@ function LoginPage() {
       <div className="floating-shape shape3"></div>
 
       <div className="login-card">
-        <div className="brand">🍔 FoodExpress</div>
+        <div className="brand-logo">
+  <img src={logo} alt="Rushank Logo" />
+</div>
         <h2>Welcome Back</h2>
         <p className="subtitle">Login to continue your food journey.</p>
 

@@ -16,7 +16,7 @@ export default function OrdersPage() {
       setLoading(true);
       setError(null);
 
-      const res = await api.get(`/api/orders/user/${userId}`);
+      const res = await api.get(`/orders/user/${userId}`);
       const ordersData = res.data || [];
       setOrders(ordersData);
 

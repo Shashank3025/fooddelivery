@@ -7,33 +7,36 @@ spring:
 
   cloud:
     gateway:
+
+      # ✅ CORS FIX (IMPORTANT)
       globalcors:
         add-to-simple-url-handler-mapping: true
-        cors-configurations:
+        corsConfigurations:
           '[/**]':
             allowedOrigins:
-              - "http://localhost:5173"
+              - "https://rushank.duckdns.org"
             allowedMethods:
               - GET
               - POST
               - PUT
               - DELETE
               - OPTIONS
-            allowedHeaders: "*"
+            allowedHeaders:
+              - "*"
             allowCredentials: true
 
       routes:
         - id: agent-service
           uri: http://agent-service:8088
           predicates:
-            - Path=/api/agent/**
+            - Path=/api/agent,/api/agent/**
           filters:
             - RewritePath=/api/agent/?(?<segment>.*), /agent/${segment}
 
         - id: ai-agent-service
           uri: http://agent-service:8088
           predicates:
-            - Path=/api/ai-agent/**
+            - Path=/api/ai-agent,/api/ai-agent/**
           filters:
             - RewritePath=/api/ai-agent/?(?<segment>.*), /ai-agent/${segment}
 
@@ -72,8 +75,29 @@ spring:
           filters:
             - RewritePath=/api/delivery/?(?<segment>.*), /delivery/${segment}
 
+        - id: notification-service
+          uri: http://notification-service:8086
+          predicates:
+            - Path=/api/notifications,/api/notifications/**
+          filters:
+            - RewritePath=/api/notifications/?(?<segment>.*), /notifications/${segment}
+
 management:
   endpoints:
     web:
       exposure:
         include: "*"
+
+  zipkin:
+    tracing:
+      endpoint: ${ZIPKIN_ENDPOINT}
+
+  tracing:
+    sampling:
+      probability: 1.0
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty.http.client: DEBUG
+    org.springframework.web.cors: DEBUG

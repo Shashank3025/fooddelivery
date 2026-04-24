@@ -29,7 +29,7 @@ function MenuPage() {
 
   const loadRestaurant = async () => {
     try {
-      const res = await api.get(`/api/restaurants/${id}`);
+      const res = await api.get(`/restaurants/${id}`);
       setRestaurantName(res.data?.name || "");
     } catch (err) {
       console.error("Failed to load restaurant:", err);
@@ -38,7 +38,7 @@ function MenuPage() {
 
   const loadMenu = async () => {
     try {
-      const res = await api.get(`/api/restaurants/${id}/menu?page=0&size=20`);
+      const res = await api.get(`/restaurants/${id}/menu?page=0&size=20`);
       setMenuItems(res.data.content || []);
     } catch (err) {
       console.error("Failed to load menu:", err);
@@ -109,7 +109,7 @@ function MenuPage() {
 
       const userId = Number(localStorage.getItem("userId")) || 1;
 
-      await api.post("/api/orders", {
+      await api.post("/orders", {
         userId,
         restaurantId: Number(id),
         restaurantName,

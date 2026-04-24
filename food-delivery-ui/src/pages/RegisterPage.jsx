@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../api/api";
 import "./RegisterPage.css";
-
+import logo from "../assets/logo.png";
 function RegisterPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -12,7 +12,7 @@ function RegisterPage() {
 
   const handleRegister = async () => {
     try {
-      const res = await api.post("/api/users", {
+      const res = await api.post("/users", {
         name,
         email,
         phone,
@@ -36,7 +36,9 @@ function RegisterPage() {
       <div className="floating-shape shape3"></div>
 
       <div className="register-card">
-        <div className="brand">🍔 FoodExpress</div>
+        <div className="brand-logo">
+        <img src={logo} alt="Rushank Logo" />
+</div>
         <h2>Create Account</h2>
         <p className="subtitle">Join now and get your favorite food delivered fast.</p>
 

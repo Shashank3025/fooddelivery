@@ -34,7 +34,7 @@ function RestaurantsPage() {
 
   const loadRestaurants = async () => {
     try {
-      const res = await api.get("/api/restaurants");
+      const res = await api.get("/restaurants");
       setRestaurants(res.data || []);
     } catch (err) {
       console.error("Failed to load restaurants:", err);
