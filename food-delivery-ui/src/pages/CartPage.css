@@ -1,0 +1,181 @@
+.cart-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 22px;
+  background: #121212;
+  color: white;
+  border-radius: 18px;
+}
+
+.cart-container h1 {
+  margin-bottom: 20px;
+  font-size: 34px;
+}
+
+.cart-list {
+  margin-top: 20px;
+}
+
+.restaurant-cart-group {
+  margin-bottom: 28px;
+  padding: 18px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.restaurant-cart-title {
+  margin-bottom: 18px;
+  color: #ffcc66;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  padding-bottom: 12px;
+  font-size: 28px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px;
+  margin-bottom: 14px;
+  background: #1e1e1e;
+  border-radius: 14px;
+}
+
+.cart-item h3 {
+  margin: 0 0 8px;
+  font-size: 22px;
+}
+
+.cart-item p {
+  margin: 4px 0;
+  font-size: 16px;
+}
+
+.cart-total {
+  font-size: 22px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.delete-item-btn {
+  margin-top: 12px;
+  padding: 9px 18px;
+  border: none;
+  border-radius: 10px;
+  background: #ff4d4d;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.restaurant-subtotal {
+  text-align: right;
+  margin-top: 16px;
+  color: #90ee90;
+  font-size: 22px;
+}
+
+.place-order-btn {
+  width: 100%;
+  margin-top: 18px;
+  padding: 15px;
+  border: none;
+  border-radius: 14px;
+  background: #2ecc71;
+  color: white;
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.cart-summary {
+  margin-top: 24px;
+  padding: 18px;
+  background: #1e1e1e;
+  border-radius: 14px;
+}
+
+.cart-summary h2 {
+  margin: 8px 0;
+  font-size: 22px;
+}
+
+.back-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px 20px;
+  border: none;
+  background: #6c63ff;
+  color: white;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.back-btn:hover {
+  background: #7f7bff;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .cart-container {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 18px 14px 90px;
+    border-radius: 0;
+  }
+
+  .cart-container h1 {
+    font-size: 30px;
+  }
+
+  .restaurant-cart-group {
+    padding: 14px;
+    margin-bottom: 22px;
+    border-radius: 14px;
+  }
+
+  .restaurant-cart-title {
+    font-size: 26px;
+  }
+
+  .cart-item {
+    flex-direction: column;
+    padding: 16px;
+  }
+
+  .cart-item h3 {
+    font-size: 21px;
+  }
+
+  .cart-item p {
+    font-size: 17px;
+  }
+
+  .cart-total {
+    align-self: flex-end;
+    font-size: 22px;
+  }
+
+  .delete-item-btn {
+    width: 120px;
+    padding: 10px;
+    font-size: 15px;
+  }
+
+  .restaurant-subtotal {
+    font-size: 21px;
+    text-align: right;
+  }
+
+  .place-order-btn {
+    font-size: 18px;
+    padding: 15px;
+  }
+
+  .cart-summary h2 {
+    font-size: 20px;
+  }
+}

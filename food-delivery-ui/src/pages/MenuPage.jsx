@@ -19,7 +19,7 @@ function MenuPage() {
   const [menuItems, setMenuItems] = useState([]);
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [placingOrder, setPlacingOrder] = useState(false);
+  const [addingToCart, setAddingToCart] = useState(false);
   const [restaurantName, setRestaurantName] = useState("");
 
   useEffect(() => {
@@ -101,35 +101,33 @@ function MenuPage() {
     [cart]
   );
 
-  const placeOrder = async () => {
+  const saveCartToRedis = async () => {
     if (cart.length === 0) return alert("Add items first");
 
     try {
-      setPlacingOrder(true);
+      setAddingToCart(true);
 
       const userId = Number(localStorage.getItem("userId")) || 1;
 
-      await api.post("/orders", {
-        userId,
-        restaurantId: Number(id),
-        restaurantName,
-        status: "PENDING",
-        items: cart.map((item) => ({
+      for (const item of cart) {
+        await api.post("/cart/items", {
+          userId: Number(userId),
+          restaurantName: restaurantName,
+          restaurantId: Number(id),
           menuItemId: item.menuItemId,
-          itemName: item.itemName || item.name,
-          itemPrice: Number(item.itemPrice ?? item.price ?? 0),
+          name: item.name,
+          price: Number(item.price),
           quantity: item.quantity,
-        })),
-      });
+        });
+      }
 
-      alert("Order placed!");
-      setCart([]);
-      navigate("/orders");
+      alert("Items added to cart!");
+      navigate("/cart");
     } catch (err) {
       console.error(err);
-      alert("Order failed");
+      alert("Failed to add items to cart");
     } finally {
-      setPlacingOrder(false);
+      setAddingToCart(false);
     }
   };
 
@@ -138,26 +136,20 @@ function MenuPage() {
       <div className="top-section">
         <div className="hero">
           <div className="hero-overlay"></div>
+
           <div className="hero-content">
             <p className="tag">🍽️ Curated Menu</p>
-            <h1>Choose your favorite dishes</h1>
+            <h1>{restaurantName || "Choose your favorite dishes"}</h1>
             <p>Freshly prepared meals from your selected restaurant.</p>
           </div>
         </div>
 
         <div className="cart-card">
-          <h2>Your Cart</h2>
+          <button className="view-cart-btn" onClick={() => navigate("/cart")}>
+            🛒 View Cart
+          </button>
 
-          {cart.length === 0 ? (
-            <p className="empty">Your cart is empty</p>
-          ) : (
-            cart.map((item) => (
-              <div key={item.menuItemId} className="cart-item">
-                <span>{item.name}</span>
-                <span>{item.quantity}</span>
-              </div>
-            ))
-          )}
+          <h2>Your Cart</h2>
 
           <div className="cart-summary">
             <div>
@@ -184,8 +176,8 @@ function MenuPage() {
             </div>
           </div>
 
-          <button onClick={placeOrder} disabled={placingOrder}>
-            {placingOrder ? "Placing..." : "Place Order"}
+          <button onClick={saveCartToRedis} disabled={addingToCart}>
+            {addingToCart ? "Adding..." : "Add to Cart"}
           </button>
         </div>
       </div>
@@ -200,7 +192,9 @@ function MenuPage() {
             {menuItems.map((item, index) => (
               <div key={item.id} className="menu-card">
                 <img
-                  src={`${foodImages[index % foodImages.length]}?auto=format&fit=crop&w=1200&q=80`}
+                  src={`${
+                    foodImages[index % foodImages.length]
+                  }?auto=format&fit=crop&w=1200&q=80`}
                   alt={item.name}
                 />
 

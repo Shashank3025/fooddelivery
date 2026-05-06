@@ -1,8 +1,9 @@
 package com.fooddelivery.order.service;
 
+
+
 import java.time.LocalDateTime;
 
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import com.fooddelivery.order.entity.Order;
@@ -16,11 +17,10 @@ import lombok.RequiredArgsConstructor;
 public class OrderCommandService {
 
     private final OrderRepository orderRepository;
-    private final KafkaTemplate<String, String> kafkaTemplate;
 
     public Order createOrder(Order order) {
 
-        order.setStatus("CREATED");
+        order.setStatus("PENDING_PAYMENT");
         order.setCreatedAt(LocalDateTime.now());
 
         if (order.getItems() != null) {
@@ -29,14 +29,6 @@ public class OrderCommandService {
             }
         }
 
-        Order savedOrder = orderRepository.save(order);
-
-        kafkaTemplate.send(
-            "order-events",
-            String.valueOf(savedOrder.getId()),
-            "OrderCreated:" + savedOrder.getId()
-        );
-
-        return savedOrder;
+        return orderRepository.save(order);
     }
 }

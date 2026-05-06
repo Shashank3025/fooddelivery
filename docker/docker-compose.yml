@@ -13,7 +13,8 @@ services:
     image: confluentinc/cp-kafka:7.6.1
     container_name: kafka
     depends_on:
-      - zookeeper
+      zookeeper:
+        condition: service_started
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
@@ -35,40 +36,20 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 5s
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -p$${MYSQL_ROOT_PASSWORD} || exit 1"]
+      interval: 10s
       timeout: 5s
       retries: 20
+      start_period: 30s
     restart: always
     networks:
       - default
 
-  zipkin:
-    image: openzipkin/zipkin
-    container_name: zipkin
+  redis:
+    image: redis:7
+    container_name: redis
     ports:
-      - "9411:9411"
-    restart: always
-    networks:
-      - default
-
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.1
-    container_name: elasticsearch
-    environment:
-      discovery.type: single-node
-      xpack.security.enabled: "false"
-    restart: always
-    networks:
-      - default
-
-  kibana:
-    image: docker.elastic.co/kibana/kibana:8.11.1
-    container_name: kibana
-    depends_on:
-      - elasticsearch
-    ports:
-      - "5601:5601"
+      - "6379:6379"
     restart: always
     networks:
       - default
@@ -87,8 +68,6 @@ services:
       DB_USERNAME: root
       DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       KAFKA_BOOTSTRAP_SERVERS: kafka:9092
-      ZIPKIN_BASE_URL: http://zipkin:9411
-      ZIPKIN_ENDPOINT: http://zipkin:9411/api/v2/spans
     restart: always
     networks:
       - default
@@ -103,12 +82,10 @@ services:
         condition: service_started
     environment:
       SPRING_PROFILES_ACTIVE: docker
-      DB_URL: jdbc:mysql://mysql:3306/foodservice
+      DB_URL: jdbc:mysql://mysql:3306/foodservice?allowPublicKeyRetrieval=true&useSSL=false&autoReconnect=true
       DB_USERNAME: root
       DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       KAFKA_BOOTSTRAP_SERVERS: kafka:9092
-      ZIPKIN_BASE_URL: http://zipkin:9411
-      ZIPKIN_ENDPOINT: http://zipkin:9411/api/v2/spans
     restart: always
     networks:
       - default
@@ -123,12 +100,10 @@ services:
         condition: service_started
     environment:
       SPRING_PROFILES_ACTIVE: docker
-      DB_URL: jdbc:mysql://mysql:3306/foodservice
+      DB_URL: jdbc:mysql://mysql:3306/foodservice?allowPublicKeyRetrieval=true&useSSL=false&autoReconnect=true
       DB_USERNAME: root
       DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       KAFKA_BOOTSTRAP_SERVERS: kafka:9092
-      ZIPKIN_BASE_URL: http://zipkin:9411
-      ZIPKIN_ENDPOINT: http://zipkin:9411/api/v2/spans
     restart: always
     networks:
       - default
@@ -143,12 +118,10 @@ services:
         condition: service_started
     environment:
       SPRING_PROFILES_ACTIVE: docker
-      DB_URL: jdbc:mysql://mysql:3306/foodservice
+      DB_URL: jdbc:mysql://mysql:3306/foodservice?allowPublicKeyRetrieval=true&useSSL=false&autoReconnect=true
       DB_USERNAME: root
       DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       KAFKA_BOOTSTRAP_SERVERS: kafka:9092
-      ZIPKIN_BASE_URL: http://zipkin:9411
-      ZIPKIN_ENDPOINT: http://zipkin:9411/api/v2/spans
     restart: always
     networks:
       - default
@@ -163,12 +136,10 @@ services:
         condition: service_started
     environment:
       SPRING_PROFILES_ACTIVE: docker
-      DB_URL: jdbc:mysql://mysql:3306/foodservice
+      DB_URL: jdbc:mysql://mysql:3306/foodservice?allowPublicKeyRetrieval=true&useSSL=false&autoReconnect=true
       DB_USERNAME: root
       DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       KAFKA_BOOTSTRAP_SERVERS: kafka:9092
-      ZIPKIN_BASE_URL: http://zipkin:9411
-      ZIPKIN_ENDPOINT: http://zipkin:9411/api/v2/spans
     restart: always
     networks:
       - default
@@ -182,8 +153,6 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: docker
       KAFKA_BOOTSTRAP_SERVERS: kafka:9092
-      ZIPKIN_BASE_URL: http://zipkin:9411
-      ZIPKIN_ENDPOINT: http://zipkin:9411/api/v2/spans
     restart: always
     networks:
       - default
@@ -198,12 +167,32 @@ services:
         condition: service_started
     environment:
       SPRING_PROFILES_ACTIVE: docker
-      DB_URL: jdbc:mysql://mysql:3306/foodservice
+      DB_URL: jdbc:mysql://mysql:3306/foodservice?allowPublicKeyRetrieval=true&useSSL=false&autoReconnect=true
       DB_USERNAME: root
       DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       KAFKA_BOOTSTRAP_SERVERS: kafka:9092
-      ZIPKIN_BASE_URL: http://zipkin:9411
-      ZIPKIN_ENDPOINT: http://zipkin:9411/api/v2/spans
+    restart: always
+    networks:
+      - default
+
+  cart-service:
+    build: ../cart-service
+    container_name: cart-service
+    depends_on:
+      redis:
+        condition: service_started
+      mysql:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
+      DB_URL: jdbc:mysql://mysql:3306/foodservice?allowPublicKeyRetrieval=true&useSSL=false&autoReconnect=true
+      DB_USERNAME: root
+      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
     restart: always
     networks:
       - default
@@ -211,19 +200,26 @@ services:
   api-gateway:
     build: ../api-gateway
     container_name: api-gateway
+    command: ["sh", "-c", "sleep 75 && java -jar app.jar"]
     depends_on:
-      - user-service
-      - restaurant-service
-      - order-service
-      - payment-service
-      - delivery-service
-      - notification-service
-      - agent-service
+      user-service:
+        condition: service_started
+      restaurant-service:
+        condition: service_started
+      order-service:
+        condition: service_started
+      payment-service:
+        condition: service_started
+      delivery-service:
+        condition: service_started
+      notification-service:
+        condition: service_started
+      agent-service:
+        condition: service_started
+      cart-service:
+        condition: service_started
     environment:
       SPRING_PROFILES_ACTIVE: docker
-      FRONTEND_ORIGIN: http://13.220.221.12
-      ZIPKIN_BASE_URL: http://zipkin:9411
-      ZIPKIN_ENDPOINT: http://zipkin:9411/api/v2/spans
     ports:
       - "8080:8080"
     restart: always

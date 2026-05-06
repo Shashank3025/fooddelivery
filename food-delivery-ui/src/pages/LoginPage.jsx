@@ -9,6 +9,20 @@ function LoginPage() {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
+    if (!email.trim() && !password.trim()) {
+    alert("Enter email and password");
+    return;
+  }
+
+  if (!email.trim()) {
+    alert("Enter email");
+    return;
+  }
+
+  if (!password.trim()) {
+    alert("Enter password");
+    return;
+  }
     try {
       const res = await api.post("/users/login", { email, password });
 

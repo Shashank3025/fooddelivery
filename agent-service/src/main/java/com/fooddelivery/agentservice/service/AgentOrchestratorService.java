@@ -1,7 +1,8 @@
 package com.fooddelivery.agentservice.service;
 
-
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -38,6 +39,23 @@ public class AgentOrchestratorService {
 
     public AgentOrderResponse placeOrder(AgentOrderRequest request) {
         try {
+            String message = normalize(request.getMessage());
+
+            if (isSearchQuestion(message)) {
+                String keyword = extractFoodKeyword(message);
+                List<MenuOption> options = searchMenuOptions(keyword);
+
+                if (options.isEmpty()) {
+                    return response("SUCCESS",
+                            "Sorry, I couldn’t find any " + keyword + " options.",
+                            request);
+                }
+
+                String reply = buildOptionsReply(keyword, options);
+
+                return response("SUCCESS", reply, request);
+            }
+
             List<RestaurantDto> restaurants = restaurantClient.getAllRestaurants();
             MatchResult bestMatch = findBestMenuMatch(request.getMessage(), restaurants);
 
@@ -62,29 +80,76 @@ public class AgentOrchestratorService {
                 );
             }
 
-            return new AgentOrderResponse(
-                    "SUCCESS",
-                    "Sorry, I couldn’t find a matching item. Please try something else.",
-                    request.getUserId(),
-                    request.getMessage(),
-                    null,
-                    null,
-                    null,
-                    null
-            );
+            return response("SUCCESS",
+                    "Sorry, I couldn’t find a matching item. Try asking: what dosas are available?",
+                    request);
 
         } catch (Exception e) {
-            return new AgentOrderResponse(
-                    "FAILED",
-                    "Agent could not process order request: " + e.getMessage(),
-                    request.getUserId(),
-                    request.getMessage(),
-                    null,
-                    null,
-                    null,
-                    null
-            );
+            return response("FAILED",
+                    "Agent could not process request: " + e.getMessage(),
+                    request);
         }
+    }
+
+    private boolean isSearchQuestion(String message) {
+        return message.contains("available")
+                || message.contains("show")
+                || message.contains("what")
+                || message.contains("options")
+                || message.startsWith("want ")
+                || message.contains("do we have");
+    }
+
+    private String extractFoodKeyword(String message) {
+        return message
+                .replaceAll("\\b(what|which|show|available|options|are|is|there|do|we|have|want|please|me|any|other|types|of)\\b", "")
+                .replaceAll("\\s+", " ")
+                .trim()
+                .replace("dosas", "dosa")
+                .replace("biryanis", "biryani");
+    }
+
+    private List<MenuOption> searchMenuOptions(String keyword) {
+        List<MenuOption> results = new ArrayList<>();
+
+        if (keyword == null || keyword.isBlank()) {
+            return results;
+        }
+
+        List<RestaurantDto> restaurants = restaurantClient.getAllRestaurants();
+
+        for (RestaurantDto restaurant : restaurants) {
+            try {
+                List<MenuItemDto> menuItems = menuClient.getMenuByRestaurantId(restaurant.getId());
+
+                if (menuItems == null) continue;
+
+                for (MenuItemDto item : menuItems) {
+                    if (item.getName() == null) continue;
+
+                    String itemName = normalize(item.getName());
+
+                    if (itemName.contains(keyword)) {
+                        results.add(new MenuOption(restaurant, item));
+                    }
+                }
+            } catch (Exception ignored) {
+            }
+        }
+
+        return results;
+    }
+
+    private String buildOptionsReply(String keyword, List<MenuOption> options) {
+        String items = options.stream()
+                .map(option -> "🍽️ " + option.menuItem.getName()
+                        + " - $" + option.menuItem.getPrice()
+                        + " from " + option.restaurant.getName())
+                .collect(Collectors.joining("\n"));
+
+        return "Here are the " + keyword + " options available:\n\n"
+                + items
+                + "\n\nTo order, say: order " + options.get(0).menuItem.getName();
     }
 
     private MatchResult findBestMenuMatch(String userMessage, List<RestaurantDto> restaurants) {
@@ -118,8 +183,7 @@ public class AgentOrchestratorService {
                     }
                 }
 
-            } catch (Exception e) {
-                // skip restaurant if menu fetch fails
+            } catch (Exception ignored) {
             }
         }
 
@@ -127,18 +191,9 @@ public class AgentOrchestratorService {
     }
 
     private int calculateMenuMatchScore(String message, String menuItemName) {
-        if (message.equals(menuItemName)) {
-            return 100;
-        }
-
-        if (message.contains(menuItemName)) {
-            return 95;
-        }
-
-        if (menuItemName.contains(message) && message.split("\\s+").length > 1) {
-            return 85;
-        }
-
+        if (message.equals(menuItemName)) return 100;
+        if (message.contains(menuItemName)) return 95;
+        if (menuItemName.contains(message)) return 85;
         return wordOverlapScore(message, menuItemName);
     }
 
@@ -157,14 +212,13 @@ public class AgentOrchestratorService {
             }
         }
 
-        if (itemWords.length == 0) {
-            return 0;
-        }
+        if (itemWords.length == 0) return 0;
 
         return (matchedWords * 100) / itemWords.length;
     }
 
     private String normalize(String text) {
+        if (text == null) return "";
         return text.toLowerCase()
                 .replaceAll("[^a-z0-9\\s]", "")
                 .replaceAll("\\s+", " ")
@@ -173,9 +227,22 @@ public class AgentOrchestratorService {
 
     private String removeCommandWords(String text) {
         return text
-                .replaceAll("\\b(order|from|want|get|me|please|restaurant)\\b", "")
+                .replaceAll("\\b(order|from|get|me|please|restaurant)\\b", "")
                 .replaceAll("\\s+", " ")
                 .trim();
+    }
+
+    private AgentOrderResponse response(String status, String message, AgentOrderRequest request) {
+        return new AgentOrderResponse(
+                status,
+                message,
+                request.getUserId(),
+                request.getMessage(),
+                null,
+                null,
+                null,
+                null
+        );
     }
 
     private static class MatchResult {
@@ -193,6 +260,16 @@ public class AgentOrchestratorService {
 
         public MenuItemDto getMenuItem() {
             return menuItem;
+        }
+    }
+
+    private static class MenuOption {
+        private final RestaurantDto restaurant;
+        private final MenuItemDto menuItem;
+
+        public MenuOption(RestaurantDto restaurant, MenuItemDto menuItem) {
+            this.restaurant = restaurant;
+            this.menuItem = menuItem;
         }
     }
 }

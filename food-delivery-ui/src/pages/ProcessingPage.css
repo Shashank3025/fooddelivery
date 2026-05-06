@@ -1,0 +1,253 @@
+.processing-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background:
+    radial-gradient(circle at top left, rgba(255, 183, 3, 0.35), transparent 34%),
+    radial-gradient(circle at bottom right, rgba(0, 200, 83, 0.3), transparent 34%),
+    linear-gradient(135deg, #101010, #1a1a1a);
+  color: white;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.processing-card {
+  width: 100%;
+  max-width: 520px;
+  padding: 38px 30px;
+  border-radius: 32px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.48);
+  backdrop-filter: blur(18px);
+  animation: cardPop 0.7s ease;
+}
+
+.food-orbit {
+  width: 125px;
+  height: 125px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  position: relative;
+  border: 2px dashed rgba(255, 255, 255, 0.24);
+  animation: rotateOrbit 5s linear infinite;
+}
+
+.food-orbit span {
+  position: absolute;
+  font-size: 26px;
+  animation: counterRotate 5s linear infinite;
+}
+
+.food-orbit span:nth-child(1) {
+  top: -12px;
+  left: 45px;
+}
+
+.food-orbit span:nth-child(2) {
+  right: -12px;
+  top: 45px;
+}
+
+.food-orbit span:nth-child(3) {
+  bottom: -12px;
+  left: 45px;
+}
+
+.food-orbit span:nth-child(4) {
+  left: -12px;
+  top: 45px;
+}
+
+.delivery-track {
+  width: 100%;
+  height: 42px;
+  margin: 14px 0 18px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.delivery-bike {
+  position: absolute;
+  top: 5px;
+  left: -45px;
+  font-size: 28px;
+  animation: bikeMove 2.4s ease-in-out infinite;
+}
+
+.processing-card h1 {
+  margin: 16px 0 8px;
+  font-size: 34px;
+  font-weight: 900;
+}
+
+.processing-card p {
+  margin: 0 0 22px;
+  color: #e8e8e8;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 12px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.16);
+  margin-bottom: 24px;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ffb703, #ff7a18, #00c853);
+  animation: progressFill 5s linear forwards;
+}
+
+.processing-steps {
+  display: grid;
+  gap: 10px;
+  text-align: left;
+}
+
+.processing-step {
+  padding: 12px 14px;
+  border-radius: 16px;
+  color: #cfcfcf;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 15px;
+  font-weight: 700;
+  transition: 0.3s ease;
+}
+
+.processing-step span {
+  margin-right: 10px;
+}
+
+.processing-step.active {
+  color: white;
+  background: rgba(0, 200, 83, 0.18);
+  border: 1px solid rgba(0, 230, 118, 0.35);
+}
+
+@keyframes bikeMove {
+  0% {
+    left: -50px;
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+  100% {
+    left: calc(100% + 50px);
+    transform: translateY(0);
+  }
+}
+
+@keyframes progressFill {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes rotateOrbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes counterRotate {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes cardPop {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* phone */
+@media (max-width: 480px) {
+
+  .processing-page {
+    padding: 16px;
+    align-items: center;
+  }
+
+  .processing-card {
+    width: 100%;
+    max-width: 360px;
+    padding: 26px 18px;
+    border-radius: 24px;
+  }
+
+  /* 🔥 Heading */
+  .processing-card h1 {
+    font-size: 24px;
+    line-height: 1.2;
+    margin-top: 12px;
+  }
+
+  .processing-card p {
+    font-size: 14px;
+    margin-bottom: 18px;
+  }
+
+  /* 🔥 Orbit smaller */
+  .food-orbit {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 12px;
+  }
+
+  .food-orbit span {
+    font-size: 20px;
+  }
+
+  /* 🔥 Bike animation smaller */
+  .delivery-track {
+    height: 34px;
+    margin: 10px 0 14px;
+  }
+
+  .delivery-bike {
+    font-size: 22px;
+    top: 4px;
+  }
+
+  /* 🔥 Progress bar */
+  .progress-bar {
+    height: 8px;
+    margin-bottom: 18px;
+  }
+
+  /* 🔥 Steps compact */
+  .processing-steps {
+    gap: 8px;
+  }
+
+  .processing-step {
+    font-size: 13px;
+    padding: 10px 12px;
+    border-radius: 14px;
+  }
+
+  .processing-step span {
+    margin-right: 6px;
+  }
+}

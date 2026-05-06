@@ -1,27 +1,37 @@
 package com.fooddelivery.payment.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name="payments")
+@Table(name = "payments")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Payment 
-{
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	Long id;
-	@Column(name = "order_id")
-	Long orderId;
-	Double amount;
-	String status;
+public class Payment {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private Long orderId;
+
+    private Double amount;
+
+    private String status; 
+    // INITIATED, PROCESSING, PAID, FAILED, REFUNDED
+
+    private String paymentMethod;
+    // CARD, PAYPAL, STRIPE, CASH
+
+    private String transactionId;
+    // External payment id from Stripe/PayPal later
+
+    private LocalDateTime createdAt;
+
+    private LocalDateTime updatedAt;
+    
+    @Column(unique = true)
+    private String idempotencyKey;
 }

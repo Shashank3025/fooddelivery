@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/api";
 import "./RestaurantsPage.css";
-
 import AgentChatbot from "./AgentChatbot";
 
 const restaurantImages = [
@@ -28,14 +27,13 @@ function RestaurantsPage() {
       navigate("/login");
       return;
     }
-
     loadRestaurants();
-  }, [userId, navigate]);
+  }, [userId]);
 
   const loadRestaurants = async () => {
     try {
       const res = await api.get("/restaurants");
-      setRestaurants(res.data || []);
+      setRestaurants(Array.isArray(res.data) ? res.data : []);
     } catch (err) {
       console.error("Failed to load restaurants:", err);
       alert("Failed to load restaurants");
@@ -45,11 +43,10 @@ function RestaurantsPage() {
   };
 
   const filteredRestaurants = useMemo(() => {
-    return restaurants.filter((restaurant) => {
+    return (restaurants || []).filter((restaurant) => {
       const name = restaurant.name?.toLowerCase() || "";
       const address = restaurant.address?.toLowerCase() || "";
       const q = search.toLowerCase();
-
       return name.includes(q) || address.includes(q);
     });
   }, [restaurants, search]);
@@ -62,9 +59,12 @@ function RestaurantsPage() {
     navigate("/orders");
   };
 
+  const goToCart = () => {
+    navigate("/cart");
+  };
+
   const handleLogout = () => {
-    localStorage.removeItem("userId");
-    localStorage.removeItem("username");
+    localStorage.clear();
     navigate("/login");
   };
 
@@ -80,10 +80,18 @@ function RestaurantsPage() {
               <span className="user-badge">Hi, {username}</span>
             </div>
 
+            {/* ✅ UPDATED BUTTONS */}
             <div className="hero-actions">
-              <button className="orders-btn" onClick={goToOrders}>
-                My Orders
-              </button>
+              <div className="top-action-row">
+                <button className="orders-btn" onClick={goToOrders}>
+                  My Orders
+                </button>
+
+                <button className="cart-btn" onClick={goToCart}>
+                  🛒 View Cart
+                </button>
+              </div>
+
               <button className="logout-btn" onClick={handleLogout}>
                 Logout
               </button>
@@ -155,8 +163,8 @@ function RestaurantsPage() {
           </div>
         )}
       </section>
-      {/* ✅ ADD CHATBOT HERE */}
-<AgentChatbot />
+
+      <AgentChatbot />
     </div>
   );
 }

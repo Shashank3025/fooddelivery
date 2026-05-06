@@ -448,25 +448,56 @@
   transform: none;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 480px) { 
   .acb-root {
-    top: 110px !important;
-    right: 12px !important;
+    top: auto !important;
+    right: 0 !important;
+    left: 0 !important;
+    bottom: 16px !important;
+    align-items: center !important; /* 👈 center horizontally */
+  }
+
+  .acb-toggle {
+    align-self: flex-end !important;
+    margin-right: 12px;
+    padding: 10px 16px !important;
+    font-size: 13px !important;
   }
 
   .acb-panel {
-  width: 460px !important;              /* ⬅️ wider */
-  height: calc(100vh - 100px) !important;  /* ⬅️ more height */
-max-height: 700px !important;            /* ⬅️ allow bigger */
-min-height: 500px !important;
+    width: 92% !important;     /* 👈 reduced width */
+    max-width: 380px !important; /* 👈 prevents too wide on big phones */
+    height: 70vh !important;
+    max-height: 620px !important;
+    min-height: 420px !important;
+    border-radius: 20px !important;
+    margin: 0 auto; /* center */
+  }
 
-  background: var(--acb-bg) !important;
-  border-radius: 24px !important;
-  display: flex !important;
-  flex-direction: column !important;
-  overflow: hidden !important;
+  .acb-header {
+    padding: 12px 12px 8px !important;
+  }
 
-  border: 0.5px solid rgba(255, 255, 255, 0.09) !important;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5) !important;
-}
+  .acb-switch-btn {
+    font-size: 11px !important;
+    padding: 7px 5px !important;
+  }
+
+  .acb-messages {
+    padding: 12px 10px !important;
+  }
+
+  .acb-input-area {
+    padding: 10px !important;
+  }
+
+  .acb-input-area input {
+    font-size: 16px !important;
+    padding: 11px 12px !important;
+  }
+
+  .acb-send {
+    min-width: 48px !important;
+    padding: 10px 12px !important;
+  }
 }

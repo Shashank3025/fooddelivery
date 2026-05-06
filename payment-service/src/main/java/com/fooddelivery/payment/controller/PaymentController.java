@@ -1,12 +1,11 @@
 package com.fooddelivery.payment.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import com.fooddelivery.payment.dto.PaymentRequest;
+import com.fooddelivery.payment.dto.PaymentResponse;
 import com.fooddelivery.payment.entity.Payment;
-import com.fooddelivery.payment.repository.PaymentRepository;
+import com.fooddelivery.payment.service.PaymentService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -15,11 +14,15 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class PaymentController {
 
-    private final PaymentRepository paymentRepository;
+    private final PaymentService paymentService;
+
+    @PostMapping({"", "/"})
+    public PaymentResponse processPayment(@RequestBody PaymentRequest request) {
+        return paymentService.processPayment(request);
+    }
 
     @GetMapping("/{orderId}")
-    public Payment getPaymentByOrder(@PathVariable Long orderId) 
-    {
-        return paymentRepository.findByOrderId(orderId);
+    public Payment getPaymentByOrder(@PathVariable Long orderId) {
+        return paymentService.getPaymentByOrderId(orderId);
     }
 }
